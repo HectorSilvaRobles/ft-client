@@ -1,0 +1,39 @@
+.coach-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background: blue; */
+}
+
+.accordion-card {
+    background: red;
+    width: 60vw;
+    border-radius: 200px;
+    margin: 50px 0;
+}
+
+/* Accordion card header styling */
+.accordion-card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    color: white;
+    height: 80px;
+    font-size: 25px;
+    font-weight: bold;
+    border: none;
+}
+.accordion-card-header:focus, .accordion-card-header:active{
+    outline: none;
+    background: #C13540;
+}
+
+
+.accordion-card-body {
+    background: #F7F7F7;
+    border: solid #D9D5D5 1.5px;
+    border-radius: 2px;
+    /* box-shadow: 15px 20px 50px black; */
+}

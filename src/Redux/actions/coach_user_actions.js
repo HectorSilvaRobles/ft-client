@@ -26,8 +26,10 @@ export function loginUser(dataToSubmit){
 
 
 export function auth(){
-    const request = axios.get(`${endpointUrl}/api/coach-users/auth`,)
+    const request = axios.get(`${endpointUrl}/api/coach-users/auth`)
     .then(res => res.data)
+    .catch(err => console.log('there was an error', err))
+
     return {
         type: AUTH_USER,
         payload: request
