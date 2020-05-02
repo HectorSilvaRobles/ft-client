@@ -6,8 +6,21 @@ import './notifications.css'
 import {createCoachPost, createPerformanceLog} from '../../../Redux/actions/coach_to_athlete_actions'
 import {removeRequest, getAllRequest} from '../../../Redux/actions/pending_actions'
 
+import { makeStyles } from '@material-ui/core/styles';
+import Badge from '@material-ui/core/Badge';
+import MailIcon from '@material-ui/icons/Mail';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+  }));
+
 function Notifications(props){
     const dispatch = useDispatch()
+    const classes = useStyles();
 
      // Modal handler for opening and closing modals
      const [show, setShow] = useState(false);
@@ -18,7 +31,6 @@ function Notifications(props){
      // Get data from redux state
      let requests = useSelector(state => state.pending_reducer.all_request);
      let athletes = useSelector(state => state.athletes_reducer.athletes)
-
 
      // If pending request is accepted 
      const acceptedRequest = (dataToSubmit, request_id, type_of_endpoint) => {
@@ -76,9 +88,7 @@ function Notifications(props){
                         }
                     }
                 }
-
                 const {firstname, lastname} = selected_athlete
-
 
                 // Popover component to show the content of the request
                 const popover = (
@@ -141,8 +151,10 @@ function Notifications(props){
     }
 
     return (
-        <div className='notification' >
-            <button onClick={handleShow}></button>
+        <div className={`notification ${classes.root}`} >
+            <Badge badgeContent={requests.all_pending_requests.length} color='error'>
+                <MailIcon onClick={handleShow} fontSize='large' style={{color: 'white'}} />
+            </Badge>
             <Modal 
                 show={show} 
                 onHide={handleClose} 
