@@ -30,9 +30,9 @@ function LoginSection(props){
         return (
             <div className='navbar_real'>
                 <div className='nav-links'>
-                        <NavLink exact to='/' className='navlink'>Home</NavLink>
-                        <NavLink exact to='/athletes' className='navlink'>Athletes</NavLink>
-                        <NavLink exact to='/coaches' className='navlink'>Coaches</NavLink>
+                        <NavLink exact to='/' className='navlink' activeStyle={{color: 'red'}}>Home</NavLink>
+                        <NavLink exact to='/athletes' className='navlink' activeStyle={{color: 'red'}}>Athletes</NavLink>
+                        <NavLink exact to='/coaches' className='navlink' activeStyle={{color: 'red'}}>Coaches</NavLink>
                 </div>
                 <div className='login-button'>
                     {redirect ? <Redirect to='/login' /> : null}
@@ -44,10 +44,10 @@ function LoginSection(props){
         return (
             <div className='navbar_real'>
                 <div className='nav-links'>
-                        <NavLink exact to='/' className='navlink'>Home</NavLink>
-                        <NavLink exact to='/athletes' className='navlink'>Athletes</NavLink>
-                        <NavLink exact to='/coaches' className='navlink'>Coaches</NavLink>
-                        <NavLink exact to='/coach-dashboard' className='navlink'>Dashboard</NavLink>
+                        <NavLink exact to='/' className='navlink' activeStyle={{color: 'red'}}>Home</NavLink>
+                        <NavLink exact to='/athletes' className='navlink' activeStyle={{color: 'red'}}>Athletes</NavLink>
+                        <NavLink exact to='/coaches' className='navlink' activeStyle={{color: 'red'}}>Coaches</NavLink>
+                        <NavLink exact to='/coach-dashboard' className='navlink' activeStyle={{color: 'red'}}>Dashboard</NavLink>
                 </div>
                 <div>
                     {props.notification}

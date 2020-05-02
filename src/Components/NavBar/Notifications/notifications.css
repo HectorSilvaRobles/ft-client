@@ -1,13 +1,19 @@
 .notification {
-    background: white;
-    width: 30px;
-    height: 30px;
+    /* background: grey; */
+    width: 50px;
+    height:50px;
+    /* margin: 0 20px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 .notification-modal {
     min-width: 45%;
     max-height: 200px;
 }
+
 
 .notification-card {
     background: #F4F4F4;
