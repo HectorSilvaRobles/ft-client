@@ -1,0 +1,61 @@
+.highlight-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.upload-video {
+    width: 60%;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-video-square {
+    height: 250px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 5px #707070; 
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.custom-file-upload {
+    background: white;
+    height: 30px;
+    width: 30%;
+    font-weight: bold;
+    border: solid 2px #707070;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #707070;
+    cursor: pointer;
+    border-radius: 5px;
+}
+input[type='file'] {
+    display: none;
+}
+
+.upload-progress-bar {
+    width: 250px;
+    margin: 10px 0;
+}
+
+.video-container {
+    height: 250px;
+    width: 250px;
+    position: relative;
+    /* padding-top: 56.25% Player ratio: 100 / (1280 / 720) */
+}
+.react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    cursor: pointer
+  }
