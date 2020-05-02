@@ -1,0 +1,326 @@
+.athlete-profile-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.athlete-profile {
+    /* background: red; */
+    width: 60%;
+    height: auto;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Profile header styling */
+.profile-header-image {
+    /* background: green; */
+    height: 100%;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile-header-image > img {
+    width: 200px;
+    height: 200px;
+    position: cover;
+    border-radius: 50%;
+    border: solid 8px #C13540;
+}
+.profile-header-info {
+    /* background: orange; */
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+.profile-header-info > h1 {
+    font-weight: bold;
+    font-size: 50px;
+}
+.profile-header-info > h2 {
+    font-weight: 400;
+    font-size: 35px;
+}
+.profile-header-info > h3 {
+    font-weight: 400;
+    font-size: 35px;
+
+}
+.profile-header {
+    background: #F7F7F7;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 3px #D9D5D5;
+    border-radius: 20px;
+    box-shadow: 1px 2px 5px grey;
+}
+
+
+/* Profile options bar */
+.profile-options {
+    background: #F7F7F7;
+    height: 15vh;
+    border-radius: 20px;
+    border: solid 3px #D9D5D5;
+    box-shadow: 1px 2px 5px grey;
+    margin: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.profile-options-button, .profile-options-button-active {
+    background : black;
+    color: white;
+    border: none;
+    font-weight: bold;
+    height: 60%;
+    width: 25%;
+    border-radius: 5px;
+    font-size: 25px;
+}
+.profile-options-button-active {
+    background:#C13540;
+}
+.profile-options-button:focus, .profile-options-button-active:focus{
+    background:#C13540;
+    outline: none;
+}
+
+
+
+/* Profile content area */
+.profile-content-area {
+    background: #F7F7F7;
+    border-radius: 20px;
+    border: solid 3px #D9D5D5;
+    box-shadow: 1px 2px 5px grey;
+    width: 100%;
+    padding: 50px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+
+/* Coach posts cards */
+.coach-posts, .performance-logs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.coach-posts > h1, .performance-accordion-component> h1 {
+    font-weight: bold;
+}
+.coach_posts_card {
+    background: white;
+    border: 1px solid black;
+    width: 80%;
+    height: 100%;
+    margin: 40px 0;
+    border-radius: 10px;
+    display: flex;
+    overflow: hidden;
+}
+.coach_posts_card_header {
+    background: black;
+    height: auto;
+    width: 25%;
+    border-radius: 10px 0 0 10px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 20vh;
+    min-width: 10vw;
+}
+.coach_posts_card_header > img {
+    height: 110px;
+    width: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: solid 5px #C13540;
+}
+.coach_posts_card_header > h1 {
+    font-size: 25px;
+    color: white;
+    margin-top: 5px;
+}
+
+.coach_posts_card_content {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.cpcc_upper {
+    /* background: blue; */
+    width: 100%;
+    height: auto;
+    min-height: 8vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.cpcc_upper > h1 {
+    font-size: 30px;
+    text-transform: capitalize;
+    margin-left: 30px;
+    font-weight: bold;
+    padding: 0;
+    color: #C13540;
+}
+.cpcc_upper > h2 {
+    font-size: 20px;
+    color: black;
+    margin-right: 30px;
+}
+
+.cpcc_lower {
+    height: auto;
+    width: 100%;
+    display: flex;
+    text-align: start;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    /* justify-content: flex-start; */
+    overflow: hidden;
+
+}
+.cpcc_lower > p {
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+
+/* Perfromance accordion/cards */
+.performance-accordion-component {
+    width: 70%;
+}
+
+.performance-accordion {
+    background: white;
+    border: 1px solid #707070;
+    margin: 40px 0;
+    border-radius: 10px;
+}
+.performance-accordion-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: black;
+    flex-direction: column;
+    color: white;
+    height: 100px;
+    font-size: 25px;
+    font-weight: bold;
+    border: none;
+    width: 100%;
+    /* border-radius: 10px; */
+}
+.performance-accordion-header > h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+.performance-accordion-header > h2 {
+    font-size: 20px;
+}
+.performance-accordion-header:focus, .performance-accordion-header:active {
+    outline: none;
+    background: #C13540;
+}
+
+.performance-card-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+}
+.performance-card {
+    background: white;
+    height: 15vh;
+    width: 80%;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #D9D5D5;
+    box-shadow: 1px 2px 5px grey;
+
+}
+.performance-card > h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.rating-star-read {
+    margin: 0 20px;
+}
+
+
+
+/* Highlights Styling */
+.highlight-area {
+    /* background: red; */
+    width: 90%;
+}
+
+.highlights-go-here {
+    /* background: green; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+}
+
+.highlight-container {
+    width: 30%;
+    height: 300px;
+    background: blue;
+    margin: 10px;
+    position: relative;
+
+}
+
+.highlight-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.highlight-modal {
+   background: black;
+   /* display: flex;
+   justify-content: center;
+   align-items: center; */
+   height: 70vh;
+   width: 100%;
+   position: relative;
+}
+
+
+.delete-option {
+    width: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.delete-icon {
+    cursor: pointer;
+}

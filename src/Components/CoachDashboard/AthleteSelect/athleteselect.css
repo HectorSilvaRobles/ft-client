@@ -1,0 +1,47 @@
+.athlete-select-component {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    padding: 10px;
+    border-radius: 15px;
+    border: solid #D9D5D5 2px;
+    background: white;
+}
+
+.athlete-select-component > h1 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.athlete-select {
+    /* background: blue; */
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 0px;
+    /* flex-direction: column; */
+}
+
+.athlete-select-option {
+    /* background: orange; */
+    width: 20%;
+    height: 5%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+}
+
+.athlete-select-option > h1 {
+    font-size: 16px;
+    margin: 10px;
+    color:#707070;
+    font-weight: bold;
+}
+
+.athlete-select-option > input {
+    border: solid black 4px;
+}

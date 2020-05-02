@@ -1,5 +1,5 @@
-import React, {Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import React, { Component } from 'react' 
+import {Redirect} from 'react-router-dom'
 import LoginSection from './LoginSection/LoginSection'
 import logo from '../../Media/logo.png'
 import {getAllRequest} from '../../Redux/actions/pending_actions'
@@ -8,12 +8,12 @@ import './navbar.css'
 
 import Notifications from './Notifications/Notifications'
 
-class NavBar extends Component {
+export class NavBar extends Component {
     constructor(props){
         super(props)
 
-        this.state={
-            redirect: false
+        this.state = {
+            redirect: false,
         }
     }
 
@@ -30,13 +30,13 @@ class NavBar extends Component {
     }
 
     render() {
-        let accRole;
+        let accRole
         if(this.props.coach_user.userData){
             const {accountRole} = this.props.coach_user.userData
             accRole = accountRole
         }
 
-        return (
+        return (    
             <div className='navbar'>
                 {this.state.redirect ? <Redirect to='/' /> : null}
                 <div className='nav-logo'>
@@ -60,4 +60,4 @@ const mapReduxToState = {
 
 const myConnect = connect(mapPropsToState, mapReduxToState)
 
-export default myConnect(NavBar)
+export default  myConnect(NavBar)

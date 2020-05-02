@@ -128,8 +128,6 @@ function LoginPage(props) {
                                 Or <a>Register Now</a>
 
                             </div>
-
-
                         </Form>
                     </div>
                 )

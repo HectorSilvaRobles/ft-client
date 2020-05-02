@@ -2,6 +2,7 @@ import axios from 'axios';
 import {LOGIN_USER, REGISTER_USER, LOGOUT_USER, AUTH_USER, UPDATE_USER} from './types'
 
 const endpointUrl = 'http://ec2-3-101-59-77.us-west-1.compute.amazonaws.com'
+axios.defaults.withCredentials = true;
 
 export function registerUser(dataToSubmit){
     const request = axios.post(`${endpointUrl}/api/coach-users/register`, dataToSubmit)
@@ -25,10 +26,9 @@ export function loginUser(dataToSubmit){
 }
 
 
-export function auth(){
-    const request = axios.get(`${endpointUrl}/api/coach-users/auth`)
-    .then(res => res.data)
-    .catch(err => console.log('there was an error', err))
+export async function auth(){
+    const request = await axios.get(`${endpointUrl}/api/coach-users/auth`, {withCredentials: true} )
+    .then(res => res.data);
 
     return {
         type: AUTH_USER,
