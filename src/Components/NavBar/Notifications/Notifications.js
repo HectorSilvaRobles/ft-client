@@ -152,7 +152,7 @@ function Notifications(props){
 
     return (
         <div className={`notification ${classes.root}`} >
-            <Badge badgeContent={requests.all_pending_requests.length} color='error'>
+            <Badge badgeContent={requests.all_pending_requests ? requests.all_pending_requests.length : 0} color='error'>
                 <MailIcon onClick={handleShow} fontSize='large' style={{color: 'white'}} />
             </Badge>
             <Modal 

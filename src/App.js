@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Route, Switch} from 'react-router-dom'
 import Auth from './Hoc/auth'
 import {toast} from 'react-toastify'
 
-import NavBar from './Components/NavBar/NabBar'
+import NavBar from './Components/NavBar/NavBar'
 import HomePage from './Components/HomePage/Homepage'
 import RegisterPage from './Components/RegisterPage/RegisterPage'
 import LoginPage from './Components/LoginPage/LoginPage'
@@ -30,9 +30,11 @@ function App(props) {
   dispatch(getAllRequest()).then(res => {
     return
   })
+
+
   return (
     <div className="App">
-      <NavBar />
+      <NavBar/>
       <div>
         <Switch>
           <Route exact path='/' component={Auth(HomePage, null)} />
