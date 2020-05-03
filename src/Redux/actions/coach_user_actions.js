@@ -37,7 +37,7 @@ export async function auth(){
 }
 
 export function logoutUser(){
-    const request = axios.get(`${endpointUrl}/api/coach-users/logout`,)
+    const request = axios.get(`${endpointUrl}/api/coach-users/logout`)
     .then(res => res.data)
 
     return {

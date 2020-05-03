@@ -2,7 +2,10 @@ import React, {useState} from 'react';
 import {withRouter, Redirect, NavLink} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import axios from 'axios'
+import ToggleButton from '../Hamburger/Togglebutton/ToggleButton'
+
 const endpointUrl = 'http://ec2-3-101-59-77.us-west-1.compute.amazonaws.com'
+
 
 function LoginSection(props){
     const user = useSelector(state => state.coach_user)
@@ -11,7 +14,7 @@ function LoginSection(props){
     const logoutHandler = () => {
         axios.get(`${endpointUrl}/api/coach-users/logout`).then(res => {
             if(res.status === 200){
-                props.history.push('/login')
+                props.history.push('/')
             } else {
                 alert('Logout Failed')
             }
@@ -34,6 +37,9 @@ function LoginSection(props){
                         <NavLink exact to='/athletes' className='navlink' activeStyle={{color: 'red'}}>Athletes</NavLink>
                         <NavLink exact to='/coaches' className='navlink' activeStyle={{color: 'red'}}>Coaches</NavLink>
                 </div>
+                <span className='togglebutton'>
+                    <ToggleButton click={props.drawerclick} />
+                </span>
                 <div className='login-button'>
                     {redirect ? <Redirect to='/login' /> : null}
                     <button onClick={() => toLoginPage()} >Coach Login</button>
@@ -52,6 +58,9 @@ function LoginSection(props){
                 <div>
                     {props.notification}
                 </div>
+                <span className='togglebutton'>
+                    <ToggleButton click={props.drawerclick} />
+                </span>
                 <div className='logout-button'>
                     <button onClick={logoutHandler}>Logout</button>
                 </div>
