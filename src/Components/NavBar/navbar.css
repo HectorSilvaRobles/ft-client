@@ -65,6 +65,9 @@
     background: red;
     color: white;
 }
+.login-button > button:focus, .logout-button > button:focus {
+    outline: none;
+}
 
 .nav-logo > img {
     width: 200px;

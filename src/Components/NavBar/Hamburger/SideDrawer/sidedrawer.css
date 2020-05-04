@@ -42,6 +42,9 @@
     border: none;
     border-radius: 5px;
 }
+.drawer > button:focus {
+    outline: none;
+}
 
 
 .drawer.open {
