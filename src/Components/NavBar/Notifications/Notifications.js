@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Modal, Popover, OverlayTrigger} from 'react-bootstrap';
+import {Modal, OverlayTrigger} from 'react-bootstrap';
 import {useSelector, useDispatch} from 'react-redux';
 import './notifications.css'
 
@@ -9,6 +9,9 @@ import {removeRequest, getAllRequest} from '../../../Redux/actions/pending_actio
 import { makeStyles } from '@material-ui/core/styles';
 import Badge from '@material-ui/core/Badge';
 import MailIcon from '@material-ui/icons/Mail';
+import Popover from '@material-ui/core/Popover';
+import {FaStar, FaTrashAlt} from 'react-icons/fa'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,14 +30,28 @@ function Notifications(props){
      const handleClose = () => setShow(false);
      const handleShow = () => setShow(true);
 
+     // For Popover
+     const [anchorEl, setAnchorEl] = useState(null);
+
 
      // Get data from redux state
      let requests = useSelector(state => state.pending_reducer.all_request);
      let athletes = useSelector(state => state.athletes_reducer.athletes)
 
+
+     // Popover handle click
+     const handleClick = (event) => {
+         setAnchorEl(event.currentTarget)
+     }
+     const handlePopoverClose =() => {
+         setAnchorEl(null);
+     }
+     const open = Boolean(anchorEl);
+     const id = open ? 'simple-popover' : undefined
+
+
      // If pending request is accepted 
      const acceptedRequest = (dataToSubmit, request_id, type_of_endpoint) => {
-         
         // If type of endpoint is createCoachPost then run this
        if(type_of_endpoint == 'createCoachPost'){
            dispatch(createCoachPost(dataToSubmit))
@@ -44,6 +61,7 @@ function Notifications(props){
                }
            })
        }
+
        // If type of endpoint is createPerformanceLog then run this
        if(type_of_endpoint == 'createPerformanceLog'){
            dispatch(createPerformanceLog(dataToSubmit))
@@ -55,7 +73,6 @@ function Notifications(props){
        }
     }
 
-
     // If pending request is rejected
     const rejectedRequest = (request_id) => {
         dispatch(removeRequest(request_id))
@@ -64,14 +81,16 @@ function Notifications(props){
         })
     }
 
+
+
     let all_requests;
     if(requests){
         const {all_pending_requests} = requests;
 
         // if there is no more pending requests then return this
-        if(all_pending_requests.length === 0){
+        if(all_pending_requests.length === 0 ){
             all_requests = <div>No incoming requests</div>
-        } else {
+        } else if(athletes){
             let selected_athlete;
             const {all_Athletes} = athletes
 
@@ -92,7 +111,84 @@ function Notifications(props){
 
                 // Popover component to show the content of the request
                 const popover = (
-                    <Popover>
+                    <Popover
+                        id={id}
+                        elevation={0}
+                        open={open}
+                        anchorEl={anchorEl}
+                        onClose={handlePopoverClose}
+                        anchorOrigin={{
+                        vertical: 'center',
+                        horizontal: 'left',
+                        }}
+                        transformOrigin={{
+                        vertical: 'center',
+                        horizontal: 'center',
+                        }}
+                    >
+                    {val.typeOfEndpoint == 'createCoachPost' ? 
+                            <div>
+                                {val.dataToSubmit.coach_message}
+                            </div>
+                        : null}
+
+                        {val.typeOfEndpoint  == 'createPerformanceLog' ? 
+                        <div className='popover-content'>
+                                <div className='performance-log-popover'>
+                                    <div className='performance-log-popover-card'>
+                                    <h1>Energy</h1>
+                                                <div>
+                                                
+                                                    {[...Array(5)].map((value, index) => {
+                                                        return (
+                                                            <FaStar
+                                                                size={35}
+                                                                key={index}
+                                                                color={val.dataToSubmit.energy_rating >= index ? '#C13540' : 'black'}
+                                                                className='rating-star-red' 
+                                                            />
+
+                                                        )
+                                                    })}
+                                                </div>
+                                    </div>
+                                    <div className='performance-log-popover-card'>
+                                    <h1>Focus</h1>
+                                                <div>
+                                                    {[...Array(5)].map((value, index) => {
+                                                        return (
+                                                            <FaStar
+                                                                size={35}
+                                                                key={index}
+                                                                color={val.dataToSubmit.focus_rating >= index ? '#C13540' : 'black'}
+                                                                className='rating-star-red' 
+                                                            />
+
+                                                        )
+                                                    })}
+                                                </div>
+                                    </div>
+                                    <div className='performance-log-popover-card'>
+                                    <h1>Leadership</h1>
+                                                <div>
+                                                    {[...Array(5)].map((value, index) => {
+                                                        return (
+                                                            <FaStar
+                                                                size={35}
+                                                                key={index}
+                                                                color={val.dataToSubmit.leadership_rating >= index ? '#C13540' : 'black'}
+                                                                className='rating-star-red' 
+                                                            />
+
+                                                        )
+                                                    })}
+                                                </div>
+                                    </div>
+                                </div>
+                        </div>
+                        : null}
+                    </Popover>
+                    /* <Popover>
                         {val.typeOfEndpoint == 'createCoachPost' ? 
                             <div>
                                 <Popover.Content>{val.dataToSubmit.coach_message}</Popover.Content> 
@@ -100,11 +196,15 @@ function Notifications(props){
                         : null}
 
                         {val.typeOfEndpoint  == 'createPerformanceLog' ? 
-                        <div>
-                            <Popover.Content>{val.dataToSubmit.energy_rating}</Popover.Content>
+                        <div className='popover-content'>
+                            <Popover.Content>
+                                <div className='performance-log-popover'>
+                                    {val.dataToSubmit.energy_rating}
+                                </div>
+                            </Popover.Content>
                         </div>
                         : null}
-                    </Popover>
+                    </Popover> */
                 )
 
                 return (
@@ -114,30 +214,12 @@ function Notifications(props){
                             <h1>Coach {val.coach_writer}</h1>
                         </div>
                         <div className='notification-card-info'>
-                            <div className='n-c-i-header'>
-                                {val.typeOfEndpoint == 'createCoachPost' ? <h1>Coach Post</h1> : null}
-                                {val.typeOfEndpoint == 'createPerformanceLog' ? <h1>Performance Log</h1> : null}
-
-                            </div>
                             <div className='n-c-i-body'>
-                                <h1>{firstname[0] + '. ' + lastname}</h1>
-
-                                {val.typeOfEndpoint === 'createCoachPost' ? 
-                                <div>
-                                    <OverlayTrigger trigger='click' placement='bottom' overlay={popover}>
-                                        <button>View Request</button>
-                                    </OverlayTrigger> 
-                                </div>
-                                : null}
-
-                                {val.typeOfEndpoint == 'createPerformanceLog' ? 
-                                <div>
-                                    <OverlayTrigger trigger='click' placement='bottom' overlay={popover}>
-                                        <button>View Request</button>
-                                    </OverlayTrigger> 
-                                </div> 
-                                : null}
-                                
+                                {val.typeOfEndpoint == 'createCoachPost' ? <h1>Type: Coach Post</h1> : null}
+                                {val.typeOfEndpoint == 'createPerformanceLog' ? <h1>Type: Performance Log</h1> : null}
+                                <h1>Athlete: {firstname[0] + '. ' + lastname}</h1>
+                                <button className='review-requests' onClick={handleClick}>View Request</button>
+                                {popover}
                             </div>
                         </div>
                         <div className='notification-card-buttons'>
@@ -152,7 +234,7 @@ function Notifications(props){
 
     return (
         <div className={`notification ${classes.root}`} >
-            <Badge badgeContent={requests.all_pending_requests ? requests.all_pending_requests.length : 0} color='error'>
+            <Badge badgeContent={requests ? requests.all_pending_requests.length : 0} color='error'>
                 <MailIcon onClick={handleShow} fontSize='large' style={{color: 'white'}} />
             </Badge>
             <Modal 

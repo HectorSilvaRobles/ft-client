@@ -19,7 +19,7 @@ export default function SideDrawer(props){
     const handleLogout = () => {
         dispatch(logoutUser()).then(res => {
             if(res.payload.success === true){
-                history.push('/')
+                history.push('/login')
             } else {
                 alert('Logout Failed')
             }

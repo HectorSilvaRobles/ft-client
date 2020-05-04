@@ -14,7 +14,7 @@ function LoginSection(props){
     const logoutHandler = () => {
         axios.get(`${endpointUrl}/api/coach-users/logout`).then(res => {
             if(res.status === 200){
-                props.history.push('/')
+                props.history.push('/login')
             } else {
                 alert('Logout Failed')
             }
