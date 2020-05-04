@@ -188,23 +188,6 @@ function Notifications(props){
                         </div>
                         : null}
                     </Popover>
-                    /* <Popover>
-                        {val.typeOfEndpoint == 'createCoachPost' ? 
-                            <div>
-                                <Popover.Content>{val.dataToSubmit.coach_message}</Popover.Content> 
-                            </div>
-                        : null}
-
-                        {val.typeOfEndpoint  == 'createPerformanceLog' ? 
-                        <div className='popover-content'>
-                            <Popover.Content>
-                                <div className='performance-log-popover'>
-                                    {val.dataToSubmit.energy_rating}
-                                </div>
-                            </Popover.Content>
-                        </div>
-                        : null}
-                    </Popover> */
                 )
 
                 return (
