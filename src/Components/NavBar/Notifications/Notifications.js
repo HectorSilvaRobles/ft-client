@@ -218,7 +218,7 @@ function Notifications(props){
     return (
         <div className={`notification ${classes.root}`} >
             <Badge badgeContent={requests ? requests.all_pending_requests.length : 0} color='error'>
-                <MailIcon onClick={handleShow} fontSize='large' style={{color: 'white'}} />
+                <MailIcon onClick={handleShow} fontSize='large' style={{color: 'white'}} className='not-icon' />
             </Badge>
             <Modal 
                 show={show} 
@@ -228,7 +228,7 @@ function Notifications(props){
                 centered={true}
             >
                 <Modal.Header closeButton={true}>
-                    <Modal.Title>Pending Requests</Modal.Title>
+                    <Modal.Title><div className='pending-header'>Pending Requests</div></Modal.Title>
                 </Modal.Header>
                 <Modal.Body >
                     <div className='notification-modal-body'>

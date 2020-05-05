@@ -10,12 +10,11 @@
 }
 
 .notification-modal {
-    min-width: 50%;
-    /* max-height: 200px; */
-    /* background: red; */
+    min-width: 55%;
 }
 .modal-body {
     margin-bottom : 50px;
+    
 }
 
 
@@ -224,6 +223,92 @@
     }
     .performance-log-popover {
         padding: 5px;
+    }
+    
+}
+
+
+@media screen and (max-width: 1000px) and (min-width: 700px){
+    .notification-modal {
+        min-width: 85%;
+    }
+    .popover-content {
+        width: 55vw;
+    }
+    .performance-log-popover-card {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1300px) and (min-width: 1000px){
+    .notification-modal {
+        min-width: 70%;
+    }
+    .popover-content {
+        width: 40vw;
+    }
+}
+
+@media screen and (min-width: 1800px){
+    .notification {
+        height: 90px;
+        width: 90px;
+    }
+    .not-icon {
+        height: 90px;
+        width: 90px;
+    }
+    .modal-content {
+        height: 50%;
+        
+    }
+    .modal-body {
+        /* background: red; */
+        margin: 0;
+        padding: 0;
+    }
+
+    .notification-card {
+        height: 15vh;
+    }
+    .notification-card-header > h1 {
+        margin-left: 15px;
+        font-size: 35px;
+    }
+    .notification-card-header > img {
+        width: 130px;
+        height: 130px;
+        position: cover;
+        border-radius: 50%;
+        border: solid 3px #C13540;
+    
+    }
+
+    .n-c-i-body > h1 {
+        font-size: 40px;
+        padding: 0;
+        text-transform: capitalize;
+        color: rgb(48, 48, 48);
+    }
+    .review-requests {
+        background: black;
+        border: none;
+        height: 60px;
+        width: 50%;
+        border-radius: 5px;
+        /* color: white; */
+        font-weight: bold;
+        margin: 10px 0;
+        font-size: 30px;
+    }
+
+    .pending-header {
+        height: 5vh;
+        font-size: 50px;
+        /* background: grey; */
+        height: 100%;
+        width: 100%;
+        padding: 20px;
     }
     
 }

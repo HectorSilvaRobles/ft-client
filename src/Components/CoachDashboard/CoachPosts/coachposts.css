@@ -86,3 +86,55 @@
     font-size : 25px;
     font-weight: bold;
 }
+
+
+@media screen and (max-width: 600px){
+    .coach-post-create-post {
+        flex-direction: column;;
+        width: 95%;
+        height: 60vh;
+        padding: 0;
+    }
+    .coach-post-create-header {
+        height: 20%;
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+        flex-direction: row;
+    }
+    .coach-post-create-header > img {
+        width: 70px;
+        height: 70px;
+        margin-right: 15px;
+    }
+    .coach-post-create-textarea {
+        width: 100%;
+        padding-top: 20px;
+        height: 75%;
+    }
+    .coach-post-create-textarea > textarea {
+        height: 100%;
+    }
+
+    .coach-post-create-select {
+        background: black;
+        color: white;
+        justify-content: center;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+
+    #coach-post-type {
+        background: white;
+        color: black;
+        margin-left: 10px;
+        width: 40%;
+    }
+
+    .create-post-button {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 1000) and (min-width: 601px){
+    
+}

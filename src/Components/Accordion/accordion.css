@@ -3,11 +3,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* background: red; */
+    overflow: hidden;
     /* background: blue; */
 }
 
 .accordion-card {
-    background: red;
+    /* background: red; */
     width: 60vw;
     border-radius: 200px;
     margin: 50px 0;
@@ -30,10 +32,27 @@
     background: #C13540;
 }
 
-
 .accordion-card-body {
     background: #F7F7F7;
     border: solid #D9D5D5 1.5px;
     border-radius: 2px;
     /* box-shadow: 15px 20px 50px black; */
+}
+
+@media screen and (max-width: 600px){
+    .accordion-card{
+        width: 95vw;
+    }
+}
+
+@media screen and (max-width: 900px) and (min-width: 601px){
+    .accordion-card {
+        width: 90vw;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 901px){
+    .accordion-card {
+        width: 80vw;
+    }
 }

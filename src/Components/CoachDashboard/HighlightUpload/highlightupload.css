@@ -3,6 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    /* background: red; */
+    margin: 30px 0;
 }
 .upload-video {
     width: 60%;
@@ -58,4 +60,11 @@ input[type='file'] {
     left: 0;
     object-fit: cover;
     cursor: pointer
+  }
+
+  @media screen and (max-width: 600px){
+      .custom-file-upload{
+          width: 90%;
+          margin-bottom: 15px;
+      }
   }
