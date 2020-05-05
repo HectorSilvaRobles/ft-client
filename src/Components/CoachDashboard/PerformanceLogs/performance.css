@@ -50,3 +50,33 @@
     font-weight: bold;
 }
  
+@media screen and (max-width: 600px){
+    .rating-card {
+        width: 95%;
+    }
+
+    .rating-button {
+        width: 95%;
+    }
+
+    .performance-log-rating {
+        width: 100%;
+    }
+    .rating-star {
+        margin: 0 8px;
+        height: 40px;
+        width: 40px;
+    }
+}
+
+@media screen and (max-width: 1000px) and (min-width: 601px){
+    .rating-card {
+        width: 95%;
+    }
+
+    .rating-star {
+        height: 45px;
+        width: 45px;
+        margin: 0 15px;
+    }
+}

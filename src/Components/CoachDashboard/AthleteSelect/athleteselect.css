@@ -45,3 +45,20 @@
 .athlete-select-option > input {
     border: solid black 4px;
 }
+
+
+@media screen and (max-width: 600px){
+    .athlete-select-component{
+        width: 95%;
+    }
+
+    .athlete-select-option {
+        /* background: orange; */
+        width: 40%;
+        height: 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+    }
+}
