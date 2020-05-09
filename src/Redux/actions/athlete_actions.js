@@ -15,6 +15,7 @@ export function getAllAthletes(){
 
 
 export function addAthlete(dataToSubmit){
+    console.log(dataToSubmit)
     const request = axios.post(`${endpointUrl}/api/athletes/add-athlete`, dataToSubmit)
     .then(res => res.data)
     .catch(err => err)

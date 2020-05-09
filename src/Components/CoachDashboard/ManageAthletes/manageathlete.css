@@ -1,0 +1,31 @@
+.manage-athletes {
+    /* background: red; */
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.manage-athletes > div {
+    /* width: 30%; */
+    /* background: blue; */
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.athlete-modal-button {
+    background: black;
+    height: 7vh;;
+    width: 25vh;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+.athlete-modal-button:active, .athlete-modal-button:hover {
+    background: #C13540;
+}
+.athlete-modal-button:focus {
+    outline: none;
+}

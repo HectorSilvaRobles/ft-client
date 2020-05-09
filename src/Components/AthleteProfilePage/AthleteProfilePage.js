@@ -290,6 +290,8 @@ export class AthleteProfilePage extends Component {
 
     handleDisplayAthlete =() => {
         const {athlete} = this.state
+        console.log(athlete)
+
         return (
             <div className='athlete-profile'>
             {this.state.highlightModal ? this.handleModal() : null}

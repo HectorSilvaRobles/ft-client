@@ -50,11 +50,14 @@ function RemoveAthleteModal(props) {
         })
     }
     return (
-        <div>
-            <button onClick={handleShow}>Remove Athlete</button>
+        <div >
+            <button className='athlete-modal-button' onClick={handleShow}>Remove Athlete</button>
             <Modal show={show} onHide={handleClose} scrollable={true}>
                 <Modal.Header>
-                    <Modal.Title>Remove Athlete</Modal.Title>
+                        <div className='add-athlete-modal-header'>
+                            <h1>Add Athlete</h1>
+                            <h2 onClick={handleClose}>X</h2>
+                        </div>
                 </Modal.Header>
                 <Modal.Body >
                     {athlete_select} 
