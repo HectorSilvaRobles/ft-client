@@ -1,0 +1,81 @@
+.each-athlete {
+    /* background: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.each-athlete > input {
+    margin-right: 10px;
+    border: solid black 1px;;
+}
+.each-athlete >h1 {
+    margin: 0;
+    text-transform: capitalize;
+    font-size: calc(16px + (22 - 16) * ((100vw - 300px) / (1700 - 300)));
+}
+
+.remove-body {
+    /* background: green; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-selection {
+    background: #F7F7F7;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+    grid-auto-rows: minmax(70px, auto);
+    grid-gap: 20px;
+    padding: 20px;
+    max-height: 600px;
+    overflow: scroll;
+    border-radius: 20px 20px 0 0;
+    border: solid rgb(179, 179, 179) 5px;
+    border-bottom: none;
+}
+
+.remove-buttons {
+    background: #F7F7F7;
+    border-radius: 0 0 20px 20px ;
+    border: solid rgb(179, 179, 179) 5px;
+    border-top: none;
+    padding-top: 20px;
+    height: 150px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.remove-buttons > button {
+    background: #C13540;
+    border: none;
+    color: white;
+    width: 80%;
+    height: 60%;
+    font-weight: bold;
+    font-size: calc(20px + (26 - 20) * ((100vw - 300px) / (1700 - 300)));
+}
+
+@media screen and (max-width: 600px){
+    .remove-selection{
+        grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+        grid-auto-rows: minmax(50px, auto);
+        max-height: 300px;
+        
+    }
+
+    .each-athlete {
+        justify-content: flex-start;;
+    }
+
+    .remove-buttons{
+        height: 100px;
+    }
+}

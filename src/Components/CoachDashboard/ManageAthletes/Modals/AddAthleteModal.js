@@ -59,8 +59,7 @@ function AddAthleteModal(props){
         } 
     }
         return (
-            <div>
-                <Formik
+            <Formik
                     initialValues={{
                         firstname: '',
                         lastname: '',
@@ -243,8 +242,7 @@ function AddAthleteModal(props){
                         )
                     }
                 }
-                </Formik>
-            </div>
+            </Formik>
         )
 }
 
