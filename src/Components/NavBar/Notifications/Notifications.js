@@ -77,19 +77,21 @@ function Notifications(props){
     const rejectedRequest = (request_id) => {
         dispatch(removeRequest(request_id))
         .then(res => {
+            console.log(res)
             dispatch(getAllRequest())
         })
     }
 
-
-
     let all_requests;
+    let rejected = [];
+
     if(requests){
         const {all_pending_requests} = requests;
 
         // if there is no more pending requests then return this
         if(all_pending_requests.length === 0 ){
             all_requests = <div>No incoming requests</div>
+
         } else if(athletes){
             let selected_athlete;
             const {all_Athletes} = athletes
@@ -98,12 +100,14 @@ function Notifications(props){
             all_requests = all_pending_requests.map(val => {
                 // get the specific athlete
                 let athlete_id = val.dataToSubmit.athlete_id
-
                 if(all_Athletes){
                     for(let i =0; i < all_Athletes.length; i++){
                         const {_id} = all_Athletes[i]
                         if(_id == athlete_id){
                             selected_athlete = all_Athletes[i]
+                            // console.log(all_Athletes[i])
+                        } else {
+                            rejectedRequest(val._id)
                         }
                     }
                 }

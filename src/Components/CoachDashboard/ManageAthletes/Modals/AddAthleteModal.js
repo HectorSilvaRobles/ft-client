@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik';
 import * as Yup from 'yup';
-import {Modal} from 'react-bootstrap'
+import {Modal, ProgressBar} from 'react-bootstrap'
 import {storage} from '../../../../firebaseConfig'
+import {toast} from 'react-toastify';
 import {useDispatch} from 'react-redux'
+import './addathlete.css'
 import {addAthlete, getAllAthletes} from '../../../../Redux/actions/athlete_actions'
 
 function AddAthleteModal(props){
@@ -20,62 +22,42 @@ function AddAthleteModal(props){
 
 
     // Uploading athlete picture to firebase and getting back the URL to image
-    const [image, setImg] = useState(null);
-    const [url, setUrl] = useState(null)
-    const [error, setError] = useState(null)
-
-    const handleFileUpload = (event) => {
+    const [picProgress, setPicProgress] = useState(0)
+    const [athletePic, setAthletePic] = useState(null)
+    const [uploadError, setUploadError] = useState(null)
+ 
+    const handleUploadChange = (event) => {
         const file = event.target.files[0]
         
         if(file){
-            const fileType = file['type'];
-            const validImageTypes = ['image/jpeg', 'image/png']
+            const fileType = file['type']
+            const validFileType = ['image/jpeg', 'image/png']
 
-            if(validImageTypes.includes(fileType)){
-                setError('')
-                setImg(file)
+            if(validFileType.includes(fileType)){
+                let fileCloudName = `${Math.random()}-${file.size}`;
+
+                const uploadAthletePic = storage.ref(`athlete/profile-pic/${fileCloudName}`).put(file)
+
+                uploadAthletePic.on(
+                    'state_changed',
+
+                    snapshot => {
+                        let uploadProgress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                        setPicProgress(uploadProgress)
+                    },
+
+                    error => setUploadError(error),
+
+                    () => {
+                        storage.ref('athlete/profile-pic').child(fileCloudName).getDownloadURL()
+                        .then(url => setAthletePic(url) )
+                    }
+                )
             } else {
-                setError('Please select an image to upload')
+                setUploadError({uploadError: 'could not upload athlete profile picture'})
             }
-        }
+        } 
     }
-
-    const handleUpdate = () => {
-        if(image){
-            const uploadTask = storage.ref(`athlete/athlete_pic/${image.name}`).put(image)
-
-            uploadTask.on(
-                'state_changed',
-
-                snapshot => {
-                    return;
-                },
-
-                error => {
-                    setError(error)
-                },
-
-                // Getting the url of the image
-                () => {
-                    storage.ref('athlete/athlete_pic').child(image.name).getDownloadURL()
-                    .then(url => {
-                        
-                        setUrl(url)
-                    })
-                }
-            )
-            
-        } else {
-            setError('Error please choose an image to upload')
-        }
-    }
-
-    const CustomInputComponent = () => (
-        <div>
-            <input type='file' onChange={handleFileUpload}  />
-            <button onClick={handleUpdate} type='button'>Upload Image</button>
-        </div>
-    )
         return (
             <div>
                 <Formik
@@ -84,7 +66,7 @@ function AddAthleteModal(props){
                         lastname: '',
                         position: '',
                         age: '',
-                        athlete_pic: url
+                        athlete_pic: athletePic
                     }}
 
                     onSubmit={(values, {setSubmitting, resetForm}) => {
@@ -94,18 +76,19 @@ function AddAthleteModal(props){
                                 lastname: values.lastname,
                                 position: values.position,
                                 age: values.age,
-                                athlete_pic: url
+                                athlete_pic: athletePic
                             }
                             
 
                             if(!dataToSubmit.athlete_pic){
-                                setError('Please add athlete picture')
+                                setUploadError('Please add athlete picture')
+                                toast.error('Please add an athlete picture')
                             } else {
                                 dispatch(addAthlete(dataToSubmit)).then(res => {
                                     if(res.payload.success){
                                         setUploadSuccess(true)
                                         dispatch(getAllAthletes())
-                                        alert(`Added ${res.payload.new_athlete.firstname} ${res.payload.new_athlete.lastname}`)
+                                        toast.success(`Successfully added ${res.payload.new_athlete.firstname} ${res.payload.new_athlete.lastname}` )
                                     }
                                 })
                                 resetForm();
@@ -130,109 +113,128 @@ function AddAthleteModal(props){
                     // reset form after successfully adding athlete
                     const resetForm = () => {
                         setUploadSuccess(false)
-                        handleClose()
+                        setAthletePic(null)
+                        setPicProgress(0)
+                        {/* handleClose() */}
                         return;
                     }
                     
                     return (
                         <div>
-                            <button onClick={handleShow}>Add Athlete</button>
-                            <Modal show={show} onHide={handleClose}>
+                            <button className='athlete-modal-button' onClick={handleShow}>Add Athlete</button>
+                            <Modal show={show} onHide={handleClose} size='lg'>
                                 <Modal.Header>
-                                    <Modal.Title>Add New Athlete</Modal.Title>
+                                        <div className='add-athlete-modal-header'>
+                                            <h1>Add Athlete</h1>
+                                            <h2 onClick={handleClose}>X</h2>
+                                        </div>
                                 </Modal.Header>
                                 <Modal.Body>
                                     <Form onSubmit={handleSubmit}>
-                                        <div className="form-group">
-                                            <label htmlFor="firstname">First Name</label>
-                                            <Field 
-                                                id="firstname" 
-                                                type="text" 
-                                                value={values.firstname}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                placeholder="Enter First Name" 
-                                                className={
-                                                    errors.firstname && touched.firstname ? 'text-input error' : 'text-input'
-                                                } 
-                                            />
-                                            {touched.firstname && errors.firstname && (
-                                                <div className='input-error-feedback'>{errors.firstname}</div>
-                                            )}
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="lastname">Last Name</label>
-                                            <Field 
-                                                id="lastname" 
-                                                type="text" 
-                                                value={values.lastname}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                placeholder="Last Name" 
-                                                className={
-                                                    errors.lastname && touched.lastname ? 'text-input error' : 'text-input'
-                                                } 
-                                            />
-                                            {touched.lastname && errors.lastname && (
-                                                <div className='input-error-feedback'>{errors.lastname}</div>
-                                            )}
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="position">Position</label>
-                                            <Field 
-                                                id="position" 
-                                                component='select'
-                                                value={values.position}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur}
-                                                placeholder="Position" 
-                                                className={
-                                                    errors.position && touched.position ? 'text-input error' : 'text-input'
-                                                } 
-                                            >
-                                                <option value=''>Select</option>
-                                                <option value='Forward'>Forward</option>
-                                                <option value='Midfielder'>Midfielder</option>
-                                                <option value='Defender'>Defender</option>
-                                                <option value='Goalie'>Goalie</option>
-                                                
-                                            </Field>
-                                            {touched.position && errors.position && (
-                                                <div className='input-error-feedback'>{errors.position}</div>
-                                            )}
-                                        </div>
-                                        <div className="form-group">
-                                            <label htmlFor="age">Age</label>
-                                            <Field 
-                                                id="age" 
-                                                type="number" 
-                                                value={values.age}
-                                                onChange={handleChange}
-                                                onBlur={handleBlur} 
-                                                placeholder='Enter athlete age'
-                                                className={
-                                                    errors.age && touched.age ? 'text-input error' : 'text-input'
-                                                } 
-                                            />
-                                            {touched.age && errors.age && (
-                                                <div className='input-error-feedback'>{errors.age}</div>
-                                            )}
-                                        </div>
-                                        <div className='form-group'>
-                                                <Field 
-                                                    id='athlete_pic' 
-                                                    as={CustomInputComponent} 
-                                                    type='text' 
-                                                    onBlur={handleBlur} 
-                                                />
-                                                <div>
-                                                    <p>{error}</p>
+                                        <div className='add-athlete-body'>
+                                            <div className='form-group-athlete-pic'>
+                                                <div className='athlete-pic-div'>
+                                                    <div className='athlete-pic-img'>
+                                                        <img src={athletePic ? athletePic : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' } alt='athlete-picture' />
+                                                    </div>
+                                                    {<ProgressBar now={picProgress} label={`${picProgress}`} className='upload-progress-bar-2' />}
+                                                    <label className='custom-file-upload-2'>
+                                                        <input type='file' onChange={(event) => handleUploadChange(event) }/>
+                                                        Change Picture
+                                                    </label>
                                                 </div>
-                                        </div>
-                                        <div>
-                                            <button variant="secondary" onClick={handleClose}>Close</button>
-                                            <button type="submit" >Save Changes</button>
-                                            {uploadSuccess ? resetForm() : null}
+                                            </div>
+                                            <div className='form-group-form'>
+                                                <div className='form-group-name'>
+                                                    <div className="form-group fg-name">
+                                                        <div className='form-label'>
+                                                            <h1>Firstname</h1>
+                                                            {errors.firstname ? <div className='input-error-feedback'>*</div> : null}
+                                                        </div>
+                                                        <Field 
+                                                            id="firstname" 
+                                                            type="text" 
+                                                            value={values.firstname}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            placeholder="Enter First Name" 
+                                                            className={
+                                                                errors.firstname && touched.firstname ? 'text-input error' : 'text-input'
+                                                            } 
+                                                        />
+                                                    </div>
+                                                    <div className="form-group fg-name">
+                                                        <div className='form-label'>
+                                                            <h1>Lastname</h1>
+                                                            {errors.lastname ? <div className='input-error-feedback'>*</div> : null}
+                                                        </div>
+                                                        <Field 
+                                                            id="lastname" 
+                                                            type="text" 
+                                                            value={values.lastname}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            placeholder="Last Name" 
+                                                            className={
+                                                                errors.lastname && touched.lastname ? 'text-input error' : 'text-input'
+                                                            } 
+                                                        />
+                                                        
+                                                    </div>
+                                                </div>
+
+
+                                                <div className='form-group-other'>
+                                                    <div className="form-group o-form">
+                                                        <div className='form-label'>
+                                                            <h1>Position</h1>
+                                                            {errors.position ? <div className='input-error-feedback'>*</div> : null}
+                                                        </div>
+                                                        <Field 
+                                                            id="position" 
+                                                            component='select'
+                                                            value={values.position}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            placeholder="Position" 
+                                                            className={
+                                                                errors.position && touched.position ? 'text-input error' : 'text-input'
+                                                            } 
+                                                        >
+                                                            <option value=''>Select</option>
+                                                            <option value='Forward'>Forward</option>
+                                                            <option value='Midfielder'>Midfielder</option>
+                                                            <option value='Defender'>Defender</option>
+                                                            <option value='Goalie'>Goalie</option>
+                                                            
+                                                        </Field>
+                                                    </div>
+
+                                                    <div className="form-group o-form">
+                                                        <div className='form-label'>
+                                                            <h1>Age</h1>
+                                                            {errors.age ? <div className='input-error-feedback'>*</div> : null}
+                                                        </div>
+                                                        {/* <label htmlFor="age">Age</label> */}
+                                                        <Field 
+                                                            id="age" 
+                                                            type="number" 
+                                                            value={values.age}
+                                                            onChange={handleChange}
+                                                            onBlur={handleBlur} 
+                                                            placeholder='Athlete age'
+                                                            className={
+                                                                errors.age && touched.age ? 'text-input error' : 'text-input'
+                                                            } 
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className='form-group-buttons'>
+                                                    
+                                                    <button type="submit" >Save Changes</button>
+                                                    {uploadSuccess ? resetForm() : null}
+                                                </div>
+                                            </div>
                                         </div>
                                     </Form>
                                 </Modal.Body>

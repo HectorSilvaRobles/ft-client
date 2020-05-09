@@ -134,7 +134,6 @@ class EditCoachUser extends Component {
                     return (
                         <Form onSubmit={handleSubmit}>
                         {this.state.updateSuccess ? this.handleResetForm() : null}
-
                             <div className='edit-profile-component'>
                                 <div className='edit-profile'>
                                     <div className='ep-photo-update'>
