@@ -5,6 +5,7 @@
     align-items: center;
     width: 85%;
     padding: 10px;
+    /* padding-top: 30px; */
     border-radius: 15px;
     border: solid #D9D5D5 2px;
     background: white;
@@ -13,33 +14,38 @@
 .athlete-select-component > h1 {
     font-size: 25px;
     font-weight: bold;
+    margin-top: 10px;
 }
 
 .athlete-select {
     /* background: blue; */
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px 0px;
-    /* flex-direction: column; */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: 10px;
+    padding: 20px;
+    max-height: 300px;
+    overflow: scroll;
 }
 
 .athlete-select-option {
     /* background: orange; */
-    width: 20%;
-    height: 5%;
+    /* width: 20%; */
+    height: 30px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     margin: 10px;
 }
 
 .athlete-select-option > h1 {
-    font-size: 16px;
+    font-size: calc(16px + (20 - 16) * ((100vw - 300px) / (1700 - 300)));
     margin: 10px;
     color:#707070;
     font-weight: bold;
+    text-transform: capitalize;
 }
 
 .athlete-select-option > input {
@@ -52,13 +58,23 @@
         width: 95%;
     }
 
+    .athlete-select{
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        grid-auto-rows: minmax(50px, auto);
+        max-height: 300px;
+        padding: 0;
+    }
+
     .athlete-select-option {
-        /* background: orange; */
-        width: 40%;
-        height: 5%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 10px;
+        /* background: red; */
+        justify-content: flex-start;
+        /* width: 50%; */
+    }
+}
+
+@media screen and (min-width: 1300px){
+    .athlete-select {
+        grid-template-columns: repeat(4, minmax(170px, 1fr));
+
     }
 }

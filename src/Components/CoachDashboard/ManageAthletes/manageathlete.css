@@ -10,6 +10,7 @@
 .manage-athletes > div {
     /* width: 30%; */
     /* background: blue; */
+    width: 300px;
     height: 200px;
     display: flex;
     justify-content: center;
@@ -17,8 +18,8 @@
 }
 .athlete-modal-button {
     background: black;
-    height: 7vh;;
-    width: 25vh;
+    height: 70px;;
+    width: 80%;
     border: none;
     color: white;
     font-weight: bold;
@@ -28,4 +29,11 @@
 }
 .athlete-modal-button:focus {
     outline: none;
+}
+
+@media screen and (max-width: 600px){
+    .manage-athletes {
+        flex-direction: column;
+        height: 250px;
+    }
 }
