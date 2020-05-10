@@ -32,12 +32,11 @@ function AthletesPage(props) {
             )
         })
     } else {
-        alert('loading')
+        alert('loading') ///////// Add loading screen/spinner
     }
 
     return (
         <div className='athlete-page'>
-            Athletes Page
             {redirect ? <Redirect to={`/athlete/${athlete}`} /> : null}
             <div className='athlete-card-layout'>
                 {athleteCards}

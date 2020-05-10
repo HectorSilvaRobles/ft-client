@@ -5,9 +5,9 @@
 }
 .coach-post-create-post {
     background: white;
-    border: solid #707070 1px;
+    border: solid #D9D5D5 2px;
     width: 85%;
-    height: 25vh;
+    height: 250px;
     display: flex;
     margin: 25px 0px;
     border-radius: 15px;
@@ -81,7 +81,7 @@
     color: white;
     border: none;
     margin: 20px 0;
-    height: 7vh;
+    height: 70px;
     width: 85%;
     font-size : 25px;
     font-weight: bold;
