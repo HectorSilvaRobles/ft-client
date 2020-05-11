@@ -4,6 +4,9 @@ import {Route, Switch} from 'react-router-dom'
 import Auth from './Hoc/auth'
 import {toast} from 'react-toastify'
 
+import "../node_modules/slick-carousel/slick/slick.css"; 
+import "../node_modules/slick-carousel/slick/slick-theme.css";
+
 import NavBar from './Components/NavBar/NavBar'
 import HomePage from './Components/HomePage/Homepage'
 import RegisterPage from './Components/RegisterPage/RegisterPage'
