@@ -7,6 +7,7 @@ import {FaStar, FaTrashAlt} from 'react-icons/fa'
 import ReactPlayer from 'react-player'
 import Modal from 'react-responsive-modal';
 import './athleteprofilepage.css'
+import Slider from 'react-slick';
 
 
 export class AthleteProfilePage extends Component {
@@ -20,7 +21,37 @@ export class AthleteProfilePage extends Component {
             performance_logs: false,
             highlights: false,
             highlightModal: false,
-            highlightVideo: []
+            highlightVideo: [],
+            reactSlider: {
+                dots: false,
+                infinite: false,
+                speed: 500,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                swipeToSlide: true,
+                className: 'profile-options-real',
+                responsive: [
+                    {
+                      breakpoint: 1024,
+                      settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                      }
+                    },
+                    {
+                      breakpoint:800,
+                      settings: {
+                        slidesToShow: 2,
+                      }
+                    },
+                    {
+                      breakpoint: 600,
+                      settings: {
+                        slidesToShow: 1,
+                      }
+                    }
+                  ]
+            }
         }
     }
 
@@ -146,7 +177,12 @@ export class AthleteProfilePage extends Component {
                     )
                 })
             } else {
-                return <div>No Coach Posts</div>
+                return (
+                    <div className='empty-athlete'>
+                        <h1>{this.state.athlete.firstname}'s Newsfeed</h1>
+                        <h2>No coach posts at the moment</h2>
+                    </div>
+                )
             }
             return (
                 <div className='coach-posts'>
@@ -165,6 +201,7 @@ export class AthleteProfilePage extends Component {
         return (
             <div className='performance-accordion-component'>
                 <h1>{athlete.firstname}'s Performance</h1>
+                {athlete.performance_logs.length > 0 ? 
                 <Accordion defaultActiveKey={0}>
                     {athlete.performance_logs.map((val, index) => {
                             return (
@@ -230,6 +267,11 @@ export class AthleteProfilePage extends Component {
                         })
                     }
                 </Accordion>
+                :
+                <div className='empty-athlete'>
+                    <h2>No performance logs at the moment</h2>
+                </div>
+                }
             </div>
         )
     }
@@ -237,10 +279,11 @@ export class AthleteProfilePage extends Component {
 
     highlightsRender = () => {
         const {athlete} = this.state
+        console.log(athlete.highlights)
         return (
             <div className="highlight-area">
                 <h1>{athlete.firstname}'s Highlights</h1>
-                {athlete.highlights ?
+                {athlete.highlights.length > 0 ?
                 <div className='highlights-go-here'>
                     {athlete.highlights.map((val, index) => {
                         return (
@@ -251,19 +294,17 @@ export class AthleteProfilePage extends Component {
                     })}
                  </div>
                 : 
-                <div>This athlete has no highlights</div>
+                <div className='empty-athlete'>
+                        <h2>No athlete highlight at the moment</h2>
+                </div>
                 }
             </div>
         )
     }
 
-
-
-
     // Open highlight modal 
     handleModal = () => {
         const {highlightVideo} = this.state
-        console.log(this.state.highlightVideo)
         return (
             <Modal 
                 open={this.state.highlightModal} 
@@ -290,7 +331,6 @@ export class AthleteProfilePage extends Component {
 
     handleDisplayAthlete =() => {
         const {athlete} = this.state
-        console.log(athlete)
 
         return (
             <div className='athlete-profile'>
@@ -302,13 +342,15 @@ export class AthleteProfilePage extends Component {
                     <div className='profile-header-info'>
                         <h1>{athlete.firstname} {athlete.lastname}</h1>
                         <h2>Position: {athlete.position}</h2>
-                        <h3>Age: {athlete.age}</h3>
+                        <h2>Age: {athlete.age}</h2>
                     </div>
                 </div>
                 <div className='profile-options'>
-                    <button className={this.state.coach_posts ? 'profile-options-button-active':'profile-options-button'} onClick={() => this.setState({coach_posts: true, performance_logs: false, highlights: false})}>Newsfeed</button>
-                    <button className={this.state.performance_logs ? 'profile-options-button-active':'profile-options-button'} onClick={() => this.setState({performance_logs: true, coach_posts: false, highlights: false})}>Performance</button>
-                    <button className={this.state.highlights ? 'profile-options-button-active':'profile-options-button'} onClick={() => this.setState({highlights: true, performance_logs: false, coach_posts: false})}>Highlights</button>
+                    <Slider {...this.state.reactSlider} >
+                        <button className={this.state.coach_posts ? 'profile-options-button-active':'profile-options-button'} onClick={() => this.setState({coach_posts: true, performance_logs: false, highlights: false})}>Newsfeed</button>
+                        <button className={this.state.performance_logs ? 'profile-options-button-active':'profile-options-button'} onClick={() => this.setState({performance_logs: true, coach_posts: false, highlights: false})}>Performance</button>
+                        <button className={this.state.highlights ? 'profile-options-button-active':'profile-options-button'} onClick={() => this.setState({highlights: true, performance_logs: false, coach_posts: false})}>Highlights</button>
+                    </Slider>
                 </div>
 
                 <div className='profile-content-area'>
