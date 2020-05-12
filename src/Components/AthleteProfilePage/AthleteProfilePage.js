@@ -5,9 +5,11 @@ import {deleteCoachPost} from '../../Redux/actions/coach_to_athlete_actions'
 import {Accordion} from 'react-bootstrap'
 import {FaStar, FaTrashAlt} from 'react-icons/fa'
 import ReactPlayer from 'react-player'
-import Modal from 'react-responsive-modal';
 import './athleteprofilepage.css'
 import Slider from 'react-slick';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+
 
 
 export class AthleteProfilePage extends Component {
@@ -180,7 +182,7 @@ export class AthleteProfilePage extends Component {
                 return (
                     <div className='empty-athlete'>
                         <h1>{this.state.athlete.firstname}'s Newsfeed</h1>
-                        <h2>No coach posts at the moment</h2>
+                        <h2>No coach posts available</h2>
                     </div>
                 )
             }
@@ -269,7 +271,7 @@ export class AthleteProfilePage extends Component {
                 </Accordion>
                 :
                 <div className='empty-athlete'>
-                    <h2>No performance logs at the moment</h2>
+                    <h2>No perfomance logs available</h2>
                 </div>
                 }
             </div>
@@ -288,14 +290,24 @@ export class AthleteProfilePage extends Component {
                     {athlete.highlights.map((val, index) => {
                         return (
                             <div className='highlight-container' key={index} >
-                                <video height='100%' className='react-player' width='100%' onClick={() => this.setState({highlightModal: true, highlightVideo: val})}><source src={val.video_link} type='video/mp4' /></video>
+                                <video 
+                                    height='100%' 
+                                    className='react-player' 
+                                    width='100%' 
+                                    onClick={() => {
+                                        this.setState({
+                                            highlightModal: true,
+                                            highlightVideo: val})
+                                    }
+                                }>
+                                <source src={val.video_link} type='video/mp4' /></video>
                             </div>
                         )
                     })}
                  </div>
                 : 
                 <div className='empty-athlete'>
-                        <h2>No athlete highlight at the moment</h2>
+                        <h2>No highlights available</h2>
                 </div>
                 }
             </div>
@@ -309,20 +321,32 @@ export class AthleteProfilePage extends Component {
             <Modal 
                 open={this.state.highlightModal} 
                 onClose={() => this.setState({highlightModal: false})}
-                styles={{
-                    modal: {
-                        maxWidth: 'unset',
-                        width: '70%',
-                        padding: 'unset'
-                    },
-                    closeButton: {
-                        background: 'white'
-                    }
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
                 }}
-                center
+                style={{display:'flex',alignItems:'center',justifyContent:'center'}}
                 >
                 <div className='highlight-modal'>
-                    <ReactPlayer className='highlight-player' url={highlightVideo.video_link} controls={true} width='100%' height='calc(100vh - 200px)' /> 
+                    {console.log(this.state.athlete.highlights)}
+                    <div className='video-real'></div>
+                    <div className='video-info'>
+                        <video 
+                            className='real-video-player' 
+                            src={highlightVideo.video_link}
+                         />
+                         <div className='controls'>
+                            <div className='video-bar'>
+                                <div className='video-juice'>
+
+                                </div>
+                            </div>
+                            <div className='video-buttons'>
+                                <button id='play-pause'></button>
+                            </div>
+                         </div>
+                    </div>
                 </div>
             </Modal>
         )
