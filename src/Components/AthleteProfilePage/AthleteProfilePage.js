@@ -218,7 +218,7 @@ export class AthleteProfilePage extends Component {
                                                     {[...Array(5)].map((value, index) => {
                                                         return (
                                                             <FaStar
-                                                                size={50}
+                                                                size={45}
                                                                 key={index}
                                                                 color={val.energy_rating >= index ? '#C13540' : 'black'}
                                                                 className='rating-star-read' 
@@ -234,7 +234,7 @@ export class AthleteProfilePage extends Component {
                                                     {[...Array(5)].map((value, index) => {
                                                         return (
                                                             <FaStar
-                                                                size={50}
+                                                                size={45}
                                                                 key={index}
                                                                 color={val.focus_rating >= index ? '#C13540' : 'black'}
                                                                 className='rating-star-read' 
@@ -250,7 +250,7 @@ export class AthleteProfilePage extends Component {
                                                     {[...Array(5)].map((value, index) => {
                                                         return (
                                                             <FaStar
-                                                                size={50}
+                                                                size={45}
                                                                 key={index}
                                                                 color={val.leadership_rating >= index ? '#C13540' : 'black'}
                                                                 className='rating-star-read' 
