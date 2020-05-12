@@ -70,14 +70,14 @@
 /* Profile options bar */
 .profile-options {
     background: #F7F7F7;
-    height: 15vh;
+    height: 120px;
     border-radius: 20px;
     border: solid 3px #D9D5D5;
     box-shadow: 1px 2px 5px grey;
     margin: 50px 0;
 }
 .profile-options-real {
-    background: green;
+    /* background: green; */
     display: flex;
     height: 100%;
     width: 100%;
@@ -90,7 +90,7 @@
     border: none;
     font-weight: bold;
     height: 60px;
-    /* width: 25%; */
+    /* width: 250px; */
     border-radius: 5px;
     font-size: 25px;
     /* margin: 0 20px; */
@@ -133,30 +133,29 @@
 }
 .coach_posts_card {
     background: white;
-    border: 1px solid black;
-    width: 80%;
+    border: solid 3px #D9D5D5;
+    width: 70%;
     height: 100%;
     margin: 40px 0;
     border-radius: 10px;
     display: flex;
+    flex-direction: column;
     overflow: hidden;
 }
 .coach_posts_card_header {
     background: black;
-    height: auto;
-    width: 25%;
-    border-radius: 10px 0 0 10px;
+    height: 100px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
     border: none;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 20vh;
-    min-width: 10vw;
+    padding: 20px;
 }
 .coach_posts_card_header > img {
-    height: 110px;
-    width: 110px;
+    height: 80px;
+    width: 80px;
+    margin: 10px 20px;
     border-radius: 50%;
     object-fit: cover;
     border: solid 5px #C13540;
@@ -169,32 +168,39 @@
 
 .coach_posts_card_content {
     height: 100%;
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding: 20px 50px;
+
 }
 .cpcc_upper {
     /* background: blue; */
     width: 100%;
     height: auto;
-    min-height: 8vh;
+    /* min-height: 8vh; */
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 }
 .cpcc_upper > h1 {
     font-size: 30px;
     text-transform: capitalize;
-    margin-left: 30px;
+    /* margin-left: 30px; */
     font-weight: bold;
     padding: 0;
     color: #C13540;
+    margin: 0;
+    font-weight: bold;
 }
 .cpcc_upper > h2 {
     font-size: 20px;
+    font-weight: bold;
     color: black;
-    margin-right: 30px;
+    /* margin-right: 30px; */
+    margin: 0;
 }
 
 .cpcc_lower {
@@ -202,15 +208,16 @@
     width: 100%;
     display: flex;
     text-align: start;
-    flex-wrap: wrap;
+    overflow-wrap: break-word;
     margin-top: 10px;
-    /* justify-content: flex-start; */
-    overflow: hidden;
-
+    word-wrap: break-word;
+    hyphens: auto;
+    
 }
 .cpcc_lower > p {
-    margin-left: 30px;
+    /* margin-left: 30px; */
     font-size: 20px;
+    max-width: 100%;
 }
 
 
@@ -301,7 +308,7 @@
 .highlight-container {
     width: 30%;
     height: 300px;
-    background: blue;
+    /* background: blue; */
     margin: 10px;
     position: relative;
 
@@ -347,10 +354,13 @@
 .empty-athlete > h2 {
     font-weight: 400;
     margin: 0;
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: calc(25px + (30 - 25) * ((100vw - 300px) / (1700 - 300)));
 }
 
+
+
+/* Mobile View */
 
 @media screen and (max-width: 600px){
     .athlete-profile {
@@ -382,9 +392,95 @@
         justify-content: center;
         align-items: center;
     }
+    .slick-slide {
+        /* margin: 0 20px; */
+        /* background: orange; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .slick-list {
+        /* margin: 0 -20px; */
+        width: 100%;
+        display: flex;
+        /* background: blue; */
+    }
+
+    /* The coach posts mobile */
+    .coach_posts_card {
+        /* background: red; */
+        width: 95%;
+        flex-direction : column;
+    }
+    .coach_posts_card_header {
+        height: 80px;
+        /* background: red; */
+        width: 100%;
+        flex-direction: row;
+        /* justify-content: space-around; */
+        border-radius: 10px 10px 0 0;
+        
+        
+    }
+
+    .coach_posts_card_header > img {
+        width: 60px;
+        margin-right: 20px;
+        height: 60px;
+        border: solid 5px #C13540;
+    }
+
+    .coach_posts_card_content {
+        width: 100%;
+        padding: 20px 20px;
+    }
+
+    .cpcc_upper {
+        /* background: red; */
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin: 0;
+    }
+    .cpcc_upper > h1, .cpcc_upper > h2 {
+        margin: 0;
+    }
+
+    .cpcc_lower {
+        /* background: blue; */
+        margin: 0;
+        padding: 10px;
+    }
+    .cpcc_lower > p {
+        margin: 0 5px;;
+    }
 }
 
-@media screen and (max-width: 1000px) and (min-width: 601px){
+
+/* React Slick */
+/* the slides */
+.slick-slide {
+    margin: 0 20px;
+    /* background: orange; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slick-track {
+    display: flex;
+}
+/* the parent */
+.slick-list {
+    /* margin: 0 -30px; */
+    width: 80%;
+    display: flex;
+    /* background: blue; */
+
+}
+@media screen and (max-width: 900px) and (min-width: 601px){
     .athlete-profile {
         width: 80%;
     }
@@ -394,6 +490,13 @@
     .profile-header-image > img {
         width: 180px;
         height: 180px;
+    }
+    .coach_posts_card {
+        width: 85%;
+    }
+
+    .slick-list {
+        width: 95%;
     }
 }
 
@@ -422,4 +525,63 @@
     .profile-header-info > h2 {
         font-size: 50px;
     }
+
+    .profile-options {
+        height: 200px;
+    }
+    .profile-options-button, .profile-options-button-active {
+        height: 100px;
+        font-size: 40px;
+    }
+
+    .coach_posts_card_header {
+        padding: 80px 90px;
+    }
+
+    .coach_posts_card_header > img {
+        width: 120px; height: 120px;
+        border: solid 10px #C13540;
+        margin-right: 30px;
+    }
+    .coach_posts_card_header > h1 {
+        font-size: 40px;
+    }
+
+    .cpcc_upper, .cpcc_lower {
+        width: 85%;
+    }
+    .cpcc_lower > p {
+        font-size: 35px;
+    }
+    .cpcc_upper > h1 {
+        font-size: calc(40px + (60 - 40) * ((100vw - 1700px) / (3000 - 1700)));
+        
+    }
+    .cpcc_upper > h2 {
+        font-size: calc(30px + (40 - 30) * ((100vw - 1700px) / (3000 - 1700)));
+
+    }
+
+    .cpcc_upper { 
+        margin: 10px 0;
+    }
+
+    /* the parent */
+    .slick-list {
+        width: 75%;
+        display: flex;
+
+    }
+
+    .slick-slide {
+        margin: 0 30px;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 901px){
+    .athlete-profile {
+        width: 70%;
+        /* background: red; */
+    }
+    
 }
