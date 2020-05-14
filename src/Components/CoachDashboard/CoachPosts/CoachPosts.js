@@ -4,6 +4,7 @@ import {createCoachPost} from '../../../Redux/actions/coach_to_athlete_actions'
 import {sendRequest, getAllRequest} from '../../../Redux/actions/pending_actions'
 import './coachposts.css'
 import AthleteSelect from '../AthleteSelect/AthleteSelect'
+import {toast} from 'react-toastify'
 
 export class CoachPosts extends Component {
     constructor(props){
@@ -54,8 +55,8 @@ export class CoachPosts extends Component {
                     this.props.sendRequest(dataToSubmit)
                     .then(res => {
                         if(res.payload.success){
+                            toast.success('Your post was successfully created. Now waiting for approval.')
                             this.setState({postSuccess: true})
-                            alert('Your post was successfully created. Now waiting for approval.')
                         }
                         this.props.getAllRequest()
 
@@ -100,12 +101,16 @@ export class CoachPosts extends Component {
 
     render() {
         const {userData} = this.props.coach_user
+        if(this.state.errorPost == true){
+           toast.error('There was an error when creating coach post')
+
+        }
         return (
             <div>
             { userData ?
                 <div className='coach-post-admin'>
                     {this.state.postSuccess ? this.handleReset() : null}
-                    {this.state.errorPost ? alert('Error') : null}
+                    
                     <div className='coach-post-create-post'>
                         <div className='coach-post-create-header'>
                             <img src={userData.profile_pic} alt='coach picture' />

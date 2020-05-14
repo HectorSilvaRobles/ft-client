@@ -10,10 +10,11 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 
 
-
 export class AthleteProfilePage extends Component {
     constructor(props) {
         super(props)
+        this.vidRef = React.createRef()
+        this.juiceRef = React.createRef()
 
         this.state = {
             athlete: null,
@@ -24,7 +25,6 @@ export class AthleteProfilePage extends Component {
             highlightModal: false,
             highlightVideo: [],
             highlightPlay: false,
-            juiceProgress: 0,
             reactSlider: {
                 dots: false,
                 infinite: false,
@@ -34,15 +34,9 @@ export class AthleteProfilePage extends Component {
                  swipeToSlide: true,
                 className: 'profile-options-real',
                 responsive: [
+
                     {
-                      breakpoint: 1024,
-                      settings: {
-                        slidesToShow: 3,
-                        slidesToScroll: 1,
-                      }
-                    },
-                    {
-                      breakpoint:800,
+                      breakpoint: 900,
                       settings: {
                         slidesToShow: 2,
                       }
@@ -56,8 +50,6 @@ export class AthleteProfilePage extends Component {
                   ]
             }
         }
-
-        this.vidRef = React.createRef()
     }
 
     componentDidMount = ( ) => {
@@ -73,6 +65,7 @@ export class AthleteProfilePage extends Component {
             })
         })
     }
+
 
     deleteFunctionality = (typeOfDelete, id) => {
         if(typeOfDelete == 'coach_post'){
@@ -154,6 +147,7 @@ export class AthleteProfilePage extends Component {
             if(all_coach_posts.length > 0){
                 coach_posts_cards = all_coach_posts.map((val) => {
                     const {coach_writer, coach_profile_pic, coach_message, type_of_post, date_of_post, coach_id} = val
+
                     return (
                         <div className='coach_posts_card' key={val._id}>
                             <div className='coach_posts_card_header'>
@@ -169,7 +163,7 @@ export class AthleteProfilePage extends Component {
                                     <p>{coach_message}</p>
                                 </div>
                             </div>
-                            {coach_id == this.props.coach_user.userData._id ? 
+                            {coach_id == this.props.coach_user.userData._id  && coach_id ? 
                                 <div className='delete-option'>
                                 <FaTrashAlt color='#C13540' onClick={() => this.deleteFunctionality('coach_post', val._id)} size={20} className='delete-icon' />
                                 </div> 
@@ -316,33 +310,17 @@ export class AthleteProfilePage extends Component {
     }
 
 
-
     // Open highlight modal 
     handleModal = () => {
-        const {highlightVideo, highlightPlay} = this.state
-        const video = document.getElementsByClassName('real-video-player')
-        const juice = document.getElementsByClassName('video-juice')
+        const {highlightVideo} = this.state
 
-        if(video.length > 0 && juice.length > 0){
-            video[0].addEventListener('timeupdate', function(){
-                var juicePros = video[0].currentTime / video[0].duration;
-                let juiceNum = juicePros * 100 
-                let juiceProgressStyle = {
-                    width: `${juiceNum}%`,
-                    height: '100%',
-                    background: '#C13540',
-                }
-        
-                this.setState({juiceProgress: juiceProgressStyle})
-            })
-        }
-
-        console.log(this.state.juiceProgress)
-        
         return (
             <Modal 
                 open={this.state.highlightModal} 
-                onClose={() => this.setState({highlightModal: false, highlightPlay: false})}
+                onClose={() => {
+                    this.vidRef.current.pause()
+                    this.setState({highlightModal: false, highlightPlay: false})}
+                    }
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
@@ -354,27 +332,26 @@ export class AthleteProfilePage extends Component {
                     <div className='video-real'></div>
                     <div className='video-info'> 
                         <video 
-                            // ref='vidRef'
-                            ref='vidRef'
+                            ref={this.vidRef}
                             className='real-video-player' 
                             src={highlightVideo.video_link}
                             type='video/mp4'
-                            // autoPlay={true}
                          />
                          <div className='controls'>
-                            <div className='video-bar'>
-                                <div 
-                                className={`video-juice ${this.state.juiceProgress}`}
-                               
-                                />
-                            </div>
-                            <div className='video-buttons' onClick={() => {this.setState({highlightPlay: !this.state.highlightPlay})}}>
+                            <div className='video-buttons' onClick={() => {
+                                if(this.vidRef.current){
+                                    if(this.vidRef.current.paused){
+                                        this.vidRef.current.play()
+                                    } else {
+                                        this.vidRef.current.pause()
+                                    }
+                                }
+                                this.setState({highlightPlay: !this.state.highlightPlay})
+                                }}>
                                 <button 
                                     id='play-pause' 
-                                    // onClick = {highlightPlay ? () => this.refs.vidRef.play() : () => this.refs.vidRef.pause()}
                                 >  
-                                    {/* {this.state.highlightPlay ? this.refs.vidRef.play() : this.refs.vidRef.pause()} */}
-                                    {this.state.highlightPlay ? <FaPause onClick={() => this.refs.vidRef.pause()}/> : <FaPlay onClick={() => this.refs.vidRef.play()} />}
+                                    {this.state.highlightPlay ? <FaPause /> : <FaPlay  />}
                                 </button>
                             </div>
                          </div>
