@@ -75,11 +75,11 @@ function Notifications(props){
 
     // If pending request is rejected
     const rejectedRequest = (request_id) => {
-        dispatch(removeRequest(request_id))
-        .then(res => {
-            console.log(res)
-            dispatch(getAllRequest())
-        })
+        // dispatch(removeRequest(request_id))
+        // .then(res => {
+        //     console.log(res)
+        //     dispatch(getAllRequest())
+        // })
     }
 
     let all_requests;
