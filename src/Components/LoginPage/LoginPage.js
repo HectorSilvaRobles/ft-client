@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {withRouter} from 'react-router-dom';
 import {loginUser} from '../../Redux/actions/coach_user_actions'
 import {Formik, Form, Field} from 'formik';
@@ -14,6 +14,10 @@ function LoginPage(props) {
     const dispatch = useDispatch()
 
     const [formErrorMessage, setFormErrorMessage ] = useState(null)
+
+    if(formErrorMessage){
+        toast.error('Login Error. Check email and password are correct')
+    }
 
     const initialEmail = localStorage.getItem('rememberMe') ? localStorage.getItem('rememberMe') : ''
 
@@ -32,7 +36,6 @@ function LoginPage(props) {
                 })}
 
                 onSubmit={(values, {setSubmitting}) => {
-                    console.log(values)
                     setTimeout(() => {
                         let dataToSubmit ={
                             email: values.email,
@@ -73,7 +76,6 @@ function LoginPage(props) {
 
                 return (
                     <div className='login'>
-                    {formErrorMessage ? toast.error('Error logging in. Please check if email or password is correct') : null}
                     <div className='login-page'>
                         <div className='login-header'>
                             <div className='login-header-div'>
