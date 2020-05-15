@@ -106,9 +106,10 @@ function Notifications(props){
                         if(_id == athlete_id){
                             selected_athlete = all_Athletes[i]
                             // console.log(all_Athletes[i])
-                        } else {
-                            rejectedRequest(val._id)
-                        }
+                        } 
+                        // else {
+                        //     rejectedRequest(val._id)
+                        // }
                     }
                 }
                 const {firstname, lastname} = selected_athlete
