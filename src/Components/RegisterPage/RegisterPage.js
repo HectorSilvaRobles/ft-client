@@ -4,65 +4,51 @@ import * as Yup from 'yup';
 import {registerUser} from '../../Redux/actions/coach_user_actions';
 import {useDispatch} from 'react-redux';
 import {storage} from '../../firebaseConfig'
+import {ProgressBar} from 'react-bootstrap'
+import './registerPage.css'
+import { toast } from 'react-toastify';
 
 function RegisterPage(props){
     const dispatch = useDispatch();
 
      // Uploading a profile pic to firebase and getting back the URL to image
-     const [image, setImg] = useState(null);
-     const [url, setUrl] = useState(null);
-     const [progress, setProgress] = useState(0);
-     const [error, setError] = useState('');
+
+     const [picProgress, setPicProgress ] = useState(0)
+     const [coachPic, setCoachPic] = useState(null)
+     const [uploadError, setUploadError] = useState(null)
+
  
-     const handleFileUpload = (event) => {
-         const file = event.target.files[0];
- 
+     const handleUploadChange = (event) => {
+         const file = event.target.files[0]
+
          if(file){
-             const fileType = file['type'];
-             const validImageTypes = ["image/jpeg", "image/png"]
- 
-             if(validImageTypes.includes(fileType)){
-                 setError('')
-                 setImg(file)
-             } else {
-                 setError('Please select an Image to upload, 1')
+             const fileType = file['type']
+             const validFileType = ['image/jpeg', 'image/png']
+
+             if(validFileType.includes(fileType)){
+                 let fileCloudName = `${Math.random()}-${file.size}`;
+
+                 const uploadCoachPic = storage.ref(`coaches/profilePics/${fileCloudName}`).put(file)
+
+                 uploadCoachPic.on(
+                     'state_changed',
+
+                     snapshot => {
+                         let uploadProgress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+
+                        setPicProgress(uploadProgress)
+                     },
+
+                     error => setUploadError(error),
+
+                     () => {
+                         storage.ref('coaches/profilePics').child(fileCloudName).getDownloadURL()
+                         .then(url => setCoachPic(url))
+                     }
+                 )
              }
          }
-         
      }
- 
-     const handleUpdate = () => {
-         if(image){
-             const uploadTask = storage.ref(`profile_pic/${image.name}`).put(image);
-     
-             uploadTask.on(
-                 'state_changed',
-     
-                 snapshot => {
-                     const progress = Math.round(snapshot.bytes / snapshot.totalBytes) * 100
-                     setProgress(progress)
-                 },
-     
-                 error => {
-                     setError(error)
-                 },
-     
-                 // Getting the url of the image
-                 () => {
-                     storage.ref('profile_pic').child(image.name).getDownloadURL()
-                     .then(url => {
-                         console.log(url)
-                         setUrl(url)
-                         setProgress(0);
-                     })
-                 }
-             )
-         } else {
-             console.log(image)
-             setError('Error please choose an image to upload')
-         }
-     }
-
 
     return (
         <Formik
@@ -77,30 +63,31 @@ function RegisterPage(props){
             }}
 
             onSubmit={(values, {setSubmitting}) => {
-
                 setTimeout(() => {
                     let dataToSubmit = {
                         email: values.email,
                         firstname: values.firstname,
                         lastname: values.lastname,
                         password: values.password,
-                        profile_pic: url ? url : '',
+                        profile_pic: coachPic,
                         accountRole: values.accountRole
                     };
-
-                    dispatch(registerUser(dataToSubmit)).then(res => {
-                        if(res.payload.loginSuccess){
-                            props.history.push('/')
-                        } 
-                        else if (res.payload.response.data.error.errmsg){
-                            alert('Email has already been registered, Login or choose a different email')
-                        }
-                         else {
-                            alert('Something went wrong...')
-                        }
-                    });
-
-                    setSubmitting(false);
+                    if(!dataToSubmit.profile_pic){
+                        toast.error('Please add a profile picture before submitting')
+                    } else {
+                        dispatch(registerUser(dataToSubmit)).then(res => {
+                            if(res.payload.loginSuccess){
+                                props.history.push('/')
+                            } 
+                            else if (res.payload.response.data.error.errmsg){
+                                toast.error('Email has already been registered, Login or choose a different email')
+                            }
+                            else {
+                                toast.error('Something went wrong...')
+                            }
+                        });
+                        setSubmitting(false);
+                    }
                 }, 500)
             }}
 
@@ -127,135 +114,134 @@ function RegisterPage(props){
             } = props;
 
             return (
-                <div className='register-page'>
-                    <h2>Sign Up</h2>
-                    <Form onSubmit={handleSubmit}>
-                        <div className='profile-picture'>
-                            <img src={url ? url : null} />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="firstname">First Name</label>
-                            <Field 
-                                id="firstname" 
-                                type="text" 
-                                value={values.firstname}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                placeholder="Enter First Name" 
-                                className={
-                                    errors.firstname && touched.firstname ? 'text-input error' : 'text-input'
-                                } 
-                            />
-                            {touched.firstname && errors.firstname && (
-                                <div className='input-error-feedback'>{errors.firstname}</div>
-                            )}
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="lastname">Last Name</label>
-                            <Field 
-                                id="lastname" 
-                                type="text" 
-                                value={values.lastname}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                placeholder="Last Name" 
-                                className={
-                                    errors.lastname && touched.lastname ? 'text-input error' : 'text-input'
-                                } 
-                            />
-                            {touched.lastname && errors.lastname && (
-                                <div className='input-error-feedback'>{errors.lastname}</div>
-                            )}
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <Field 
-                                id="email" 
-                                type="email" 
-                                value={values.email}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                placeholder="Enter your email" 
-                                className={
-                                    errors.email && touched.email ? 'text-input error' : 'text-input'
-                                } 
-                            />
-                            {touched.email && errors.email && (
-                                <div className='input-error-feedback'>{errors.email}</div>
-                            )}
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <Field 
-                                id="password" 
-                                type="password" 
-                                value={values.password}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                placeholder="Create new password" 
-                                className={
-                                    errors.password && touched.password ? 'text-input error' : 'text-input'
-                                } 
-                            />
-                            {touched.password && errors.password && (
-                                <div className='input-error-feedback'>{errors.password}</div>
-                            )}
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="confirm">Confirm Password</label>
-                            <Field 
-                                id="confirmPassword" 
-                                type="password" 
-                                value={values.confirmPassword}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                placeholder="Confirm password" 
-                                className={
-                                    errors.confirmPassword && touched.confirmPassword ? 'text-input error' : 'text-input'
-                                } 
-                            />
-                            {touched.confirmPassword && errors.confirmPassword && (
-                                <div className='input-error-feedback'>{errors.confirmPassword}</div>
-                            )}
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="confirm">Account Role</label>
-                            <Field 
-                                id="accountRole" 
-                                component="select"
-                                className="select-option"
-                                value={values.accountRole}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                            >
-                                <option value="">Select</option>
-                                <option value='Admin'>Admin</option>
-                                <option value="Regular">Regular</option>
-                            </Field>
-                            {touched.accountRole && errors.accountRole && (
-                                    <div className='input-error-feedback'>{errors.accountRole}</div>
-                            )}
-                        </div>
-
-                        <div className='form-group'>
-                                <div className='upload-profile-pic'>
-                                    <input type='file' onChange={handleFileUpload} id='profile_pic' name='profile_pic' />
-                                    <button onClick={handleUpdate} type='button'>Upload Image</button>
+                <div className='register'>
+                    <div className='register-page'>
+                        <div className='register-form'>
+                            <div className='register-header'></div>
+                            <div className='reigster-body'>
+                                <Form onSubmit={handleSubmit}>
+                                <div className='profile-picture'>
+                                    <div className='profile-pic-img'>
+                                        <img src={coachPic ? coachPic : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'} />
+                                    </div>
+                                    {<ProgressBar now={picProgress} label={`${picProgress}`} className='upload-progress-bar-3' />}
+                                    <label className='custom-file-upload-3'>
+                                        <input type='file' onChange={(event) => handleUploadChange(event) }/>
+                                        Upload Picture
+                                    </label>
                                 </div>
-                                <div style={{height: '100px'}}>
-                                    <p style={{color: 'red'}}>{error}</p>
-                                </div>
-                        </div>
+                                <div className='register-form-names'>
+                                    <div className="register-form-group">
+                                        <div className='register-form-group-title'>
+                                            <h1>Firstname</h1>
+                                            {touched.firstname && errors.firstname ? <h1 className='error-form'>*</h1> : null}
+                                        </div>
+                                        <Field 
+                                            id="firstname" 
+                                            type="text" 
+                                            value={values.firstname}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Enter Firstname" 
+                                            className={'text-input-register'} 
+                                        />
+                                    </div>
 
-                        <div className='form-submit-button'>
-                            <button type='submit' disabled={isSubmitting} >Submit</button>
+                                    <div className="register-form-group">
+                                        <div className='register-form-group-title'>
+                                            <h1>Lastname</h1>
+                                            {touched.lastname && errors.lastname ? <h1 className='error-form'>*</h1> : null}
+                                        </div>
+                                        <Field 
+                                            id="lastname" 
+                                            type="text" 
+                                            value={values.lastname}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Enter Lastname" 
+                                            className={'text-input-register'} 
+                                        />
+                                    </div>
+                                </div>
+                                
+
+                                <div className='register-form-names'>
+                                    <div className="register-form-group">
+                                        <div className='register-form-group-title'>
+                                            <h1>Email</h1>
+                                            {touched.email && errors.email ? <h1 className='error-form'>*</h1> : null}
+                                        </div>
+                                        <Field 
+                                            id="email" 
+                                            type="email" 
+                                            value={values.email}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Enter Email" 
+                                            className={'text-input-register'} 
+                                        />
+                                    </div>
+
+                                    <div className="register-form-group">
+                                        <div className='register-form-group-title'>
+                                            <h1>Account Role</h1>
+                                            {touched.accountRole && errors.accountRole ? <h1 className='error-form'>*</h1> : null}
+                                        </div>
+                                        <Field 
+                                            id="accountRole" 
+                                            component="select"
+                                            className="text-input-register"
+                                            value={values.accountRole}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                        >
+                                            <option value="">Select</option>
+                                            <option value='Admin'>Admin</option>
+                                            <option value="Regular">Regular</option>
+                                        </Field>
+                                    </div>
+                                </div>
+
+                                <div className='register-form-names'>
+                                    <div className="register-form-group">
+                                            <div className='register-form-group-title'>
+                                                <h1>Create Password</h1>
+                                                {touched.password && errors.password ? <h1 className='error-form'>*</h1> : null}
+                                            </div>
+                                            <Field 
+                                                id="password" 
+                                                type="password" 
+                                                value={values.password}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                placeholder="Create Password" 
+                                                className={'text-input-register'} 
+                                            />
+                                    </div>
+                                    <div className="register-form-group">
+                                        <div className='register-form-group-title'>
+                                                <h1>Confirm Password</h1>
+                                                {touched.confirmPassword && errors.confirmPassword ? <h1 className='error-form'>*</h1> : null}
+                                            </div>
+                                        <Field 
+                                            id="confirmPassword" 
+                                            type="password" 
+                                            value={values.confirmPassword}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            placeholder="Confirm Password" 
+                                            className={'text-input-register'} 
+                                        />
+                                        
+                                    </div>
+                                </div>
+                                <div className='form-submit-button'>
+                                    <button type='submit'  >Submit</button>
+                                </div>
+                            </Form>
+                            </div>
                         </div>
-                    </Form>
+                    </div>
                 </div>
             )
         }}
