@@ -4,11 +4,16 @@ import {loginUser} from '../../Redux/actions/coach_user_actions'
 import {Formik, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
+import {FaEnvelope, FaLock} from 'react-icons/fa'
+import './loginPage.css'
+
+import {toast} from 'react-toastify'
+
 
 function LoginPage(props) {
     const dispatch = useDispatch()
 
-    const [formErrorMessage, setFormErrorMessage ] = useState('')
+    const [formErrorMessage, setFormErrorMessage ] = useState(null)
 
     const initialEmail = localStorage.getItem('rememberMe') ? localStorage.getItem('rememberMe') : ''
 
@@ -27,6 +32,7 @@ function LoginPage(props) {
                 })}
 
                 onSubmit={(values, {setSubmitting}) => {
+                    console.log(values)
                     setTimeout(() => {
                         let dataToSubmit ={
                             email: values.email,
@@ -39,11 +45,11 @@ function LoginPage(props) {
                             if(res.payload.loginSuccess){
                                 props.history.push('/') 
                             } else {
-                                setFormErrorMessage('Check your email or password again')
+                                setFormErrorMessage(true)
                             }
                         })
                         .catch(err => {
-                            setFormErrorMessage('Error Logging in. Check your email or password');
+                            setFormErrorMessage(true);
                             setTimeout(() => {
                                 setFormErrorMessage('')
                             }, 5000)
@@ -66,11 +72,20 @@ function LoginPage(props) {
                 } = props;
 
                 return (
+                    <div className='login'>
+                    {formErrorMessage ? toast.error('Error logging in. Please check if email or password is correct') : null}
                     <div className='login-page'>
-                        <h1>Login</h1>
+                        <div className='login-header'>
+                            <div className='login-header-div'>
+                                <h1>AB Futbol Login</h1>
+                                <h2>Access Coach Dashboard</h2>
+                                
+                            </div>
+                        </div>
+                        <div className='login-form'>
                         <Form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="email">Email</label>
+                            <div className="login-form-group">
+                                <FaEnvelope className='form-icons' />
                                 <Field 
                                     id="email" 
                                     type="email" 
@@ -78,17 +93,13 @@ function LoginPage(props) {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     placeholder="Enter Your Email" 
-                                    className={
-                                        errors.email && touched.email ? 'text-input error' : 'text-input'
-                                    } 
+                                    className={'text-input-login'} 
                                 />
-                                {touched.email && errors.email && (
-                                    <div className='input-error-feedback'>{errors.email}</div>
-                                )}
+                                {errors.email && touched.email ? <h1 className='error-form'>*</h1> : null}
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
+                            <div className="login-form-group">
+                                <FaLock className='form-icons' />
                                 <Field 
                                     id="password" 
                                     type="password" 
@@ -96,39 +107,18 @@ function LoginPage(props) {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     placeholder="Enter Your Password" 
-                                    className={
-                                        errors.password && touched.password ? 'text-input error' : 'text-input'
-                                    } 
+                                    className={'text-input-login'} 
                                 />
-                                {touched.password && errors.password && (
-                                    <div className='input-error-feedback'>{errors.password}</div>
-                                )}
+                                {errors.password && touched.password ? <h1 className='error-form'>*</h1> : null}
+
                             </div>
-
-                            {formErrorMessage && (
-                                <label>
-                                    <p style={
-                                        {
-                                            color: '#ff000bf', 
-                                            fontSize: '0.7rem', 
-                                            border: '1px solid', 
-                                            padding: '1rem', 
-                                            borderRadius: '10px'}
-                                        }>
-                                        {formErrorMessage}
-                                    </p>
-                                </label>
-                            )}
-                            
-                            <div> 
-                                <a></a>
-                                <div>
-                                    <button type='primary' htmlFor='submit' disabled={isSubmitting} onSubmit={handleSubmit}>Log In</button>
-                                </div>
-                                Or <a>Register Now</a>
-
+                            <div className='login-form-button'> 
+                                    <button type='primary' htmlFor='submit' disabled={isSubmitting} onSubmit={handleSubmit}>Login</button>
                             </div>
                         </Form>
+                        </div>
+                        
+                    </div>
                     </div>
                 )
             }}
