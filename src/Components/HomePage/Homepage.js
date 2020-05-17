@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react'
-import video from '../../Media/video.mp4'
+import video from '../../Media/video2.mp4'
 import video2 from '../../Media/vid2.mp4'
 import banner from '../../Media/banner.mp4'
 
@@ -40,7 +40,7 @@ export class Homepage extends Component {
         .setTween('#section1-div', {
             // opacity: 0,
             scale: .8,
-            y: 100,
+            y: 200,
             opacity: 1
         })
         .addTo(this.controller)
@@ -51,8 +51,8 @@ export class Homepage extends Component {
             triggerHook: 0
         })
         .setTween('#banner-info', {
-            opacity: 0,
-            scale: .8,
+            opacity: 0.5,
+            // scale: .8,
             y: -400
         })
         .addTo(this.controller)
@@ -178,7 +178,7 @@ export class Homepage extends Component {
                 </div>
                 <div className='section2' id='section2'>
                     <div className='video-sec2' id='video-sec2'>
-                        <video id='video-1' src={video} loop={true} autoPlay={true} />
+                        <video id='video-1' src={video} muted={true} loop={true} autoPlay={true} />
                     </div>
                     <h1 id='sec2-h1-1'>We help athletes Improve their skills on the field</h1>
                 </div>
