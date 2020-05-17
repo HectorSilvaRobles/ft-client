@@ -1,0 +1,325 @@
+.homepage {
+    background:black;
+    overflow: hidden;
+}
+.section1 {
+    height: 100vh;
+    background: black;
+}
+
+#section1-div {
+    /* background: red; */
+    position: absolute;
+    bottom: 0%;
+    height: 100px;
+    width: 100px;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+#section1-div > img {
+   height: 60%;
+}
+
+#banner-info {
+    /* background: blue; */
+    position: absolute;
+    height: 70%;
+    width: 40%;
+    /* bottom: 20%; */
+    left: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+#banner-info >h3 {
+    margin-top: 50px;
+    font-size: 25px;
+    /* background: red; */
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    box-shadow: 0px 0px 50px 5px rgba(255,255,255,1);
+    padding: 20px;
+    border-radius: 50px;
+}
+
+.banner-title {
+    font-size: calc(30px + (70 - 30) * ((100vw - 300px) / (1700 - 300)));
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+    text-align: left;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px white;
+    /* width: 100%; */
+    width: 90%;
+
+}
+
+.banner-small {
+    font-size: calc(20px + (40 - 20) * ((100vw - 300px) / (1700 - 300)));
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+    text-align: left;
+    font-weight: 500;
+    width: 90%;
+}
+#banner-video {
+    /* background: green; */
+    position: absolute;
+    height: 70%;
+    width: 35%;
+    bottom: 20%;
+    left: 55%;
+}
+#section1 > h1 {
+    color: white;
+    text-transform: uppercase;
+    font-size: calc(50px + (100 - 50) * ((100vw - 300px) / (1700 - 300)));
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    /* background: red; */
+    letter-spacing: 2px;
+    width: 100%;
+    text-shadow: 0px 0px 30px rgba(255,255,255,1);
+    position: absolute;
+    top: 10%;
+}
+
+#section1-div {
+    height: 500px;
+    width: 500px;
+    /* background: red; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 0;
+    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+}
+
+
+.section2 {
+    height: 80vh;
+    background: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+#sec2-h1-1  {
+    z-index: 2;
+    width: 50%;
+    position: absolute;
+    text-align: center;
+    text-transform: capitalize;
+    color: white;
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: calc(50px + (100 - 50) * ((100vw - 300px) / (1700 - 300)));
+    top: 30%;
+    opacity: 0;
+}
+
+#video-sec2 {
+    /* background: red;  */
+    height: 500px;
+    width: 80%;
+    position: absolute;
+    top: 80%;
+}
+
+#video-sec2 > video {
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    position: relative;
+}
+
+.section3 {
+    height: 100vh;
+    background: black;
+}
+.section3 > h1 {
+    position: relative;
+    /* background: red; */
+    opacity: 0;
+    top: 50%;
+    width: 40%;
+    text-align: left;
+    text-transform: capitalize;
+    color: white;
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: calc(30px + (60 - 30) * ((100vw - 600px) / (1700 - 600)));
+}
+
+#sec3-vid {
+    position: relative;
+    /* background: red; */
+    height: 60%;
+    width: 30%;
+    left: 60%;
+    opacity: 0;
+    bottom: 0%;
+}
+#sec3-vid > video {
+    height: 100%;
+    width: 100%;
+}
+
+
+.section4 {
+    height: 100vh;
+    background: white;
+}
+
+
+
+
+
+@media screen and (max-width: 600px){
+
+    #section1 {
+        display: flex;
+        flex-direction: column;;
+        /* background: red; */
+    }
+
+    #banner-info {
+        /* background: green; */
+        width: 90%;
+        height: 50%;
+        top: 30%;
+        left: 5%;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+    #banner-info > h2, #banner-info > h1 {
+        text-align: center;
+    }
+    #banner-info > h3 {
+        padding: 10px 30px;
+        font-size: 15px;
+        text-align: center;
+        margin: 20px;
+        
+    }
+    #banner-video {
+        width: 100%;
+        height: 80%;
+        left: 0%;
+        top: 0%;
+        /* background: blue; */
+    }
+    #banner-video > video {
+        /* width: 100%; */
+        height: 100%;
+    }
+    .section2 {
+        height: 70vh;
+        /* background: grey; */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #sec2-h1-1 , #sec2-h1-2, #sec2-h1-3 {
+        /* background: red; */
+        width: 80%;
+        /* margin: 20px 0;  */
+        position: absolute;
+        text-align: center;
+        text-transform: capitalize;
+        color: white;
+        font-size: calc(30px + (40 - 30) * ((100vw - 300px) / (600 - 300)));
+    }
+    #sec2-h1-1 {
+        top: 60%;
+    }
+    #sec2-h1-2 {
+        top: 75%;
+    }
+    #sec2-h1-3 {
+        top: 90%;
+    }
+
+    #sec3-h1 {
+        display: none;
+    }
+
+    .section3 > h1 {
+        width: 90%;
+        z-index: 1;
+        left: 5%;
+        /* background: blue; */
+        text-align: center;
+        top: 70%;
+    }
+    #sec3-vid {
+        width: 90%;
+        left: 5%;
+        height: 60%;
+        top: 20%;
+    }
+}
+
+
+@media screen and (max-width: 1000px) and (min-width: 601px){
+    #section1 {
+        display: flex;
+        flex-direction: column;;
+        /* background: red; */
+    }
+
+    #banner-info {
+        /* background: green; */
+        width: 90%;
+        height: 50%;
+        top: 300px;
+        left: 5%;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+    #banner-info > h2, #banner-info > h1 {
+        text-align: center;
+    }
+    #banner-info > h2 {
+        width: 80%;
+    }
+    #banner-info > h3 {
+        padding: 10px 30px;
+        font-size: 15px;
+        text-align: center;
+        margin: 20px;
+        
+    }
+    #banner-video {
+        width: 100%;
+        height: 100%;
+        left: 0%;
+        top: 0%;
+        /* background: blue; */
+    }
+    #banner-video > video {
+        width: 100%;
+        /* height: 100%; */
+    }
+}
+
+@media screen and (min-width: 601px){
+    #sec3-h1-mobile {
+        display: none;
+    }
+}

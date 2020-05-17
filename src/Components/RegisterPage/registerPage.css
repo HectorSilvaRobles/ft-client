@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100%;
 }
 .register-page {
     /* background: red; */
@@ -14,8 +14,18 @@
     align-items: center;
     border-radius: 10px;
     overflow: hidden;
+    margin: 50px 0;
     box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.8)
-
+}
+.register-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.register-header > h1 {
+    font-size: calc(18px + (25 - 18) * ((100vw - 300px) / (1700 - 300)));
+    color: white;
+    margin: 20px 0;
 }
 
 .register-form {
@@ -75,7 +85,7 @@
     justify-content: center;
     align-items: center;
     /* background: pink; */
-    margin-bottom: 10px;
+    margin: 20px 0;
 }
 .form-submit-button > button {
     width: 85%;
@@ -137,3 +147,141 @@
     border: solid 3px grey;
     cursor: pointer;
 }
+
+
+/* Mobile View */
+
+@media screen and (max-width: 600px){
+    .register {
+        height: 100%;
+    }
+    
+    .register-page {
+        width: 90%;
+        height: 100%;
+        margin: 20px 0;
+    }
+
+    .register-form-names {
+        display: flex;
+        height:200px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        /* background: orange; */
+        padding: 0;
+        margin:2px;
+        overflow: hidden;
+    }
+
+    .text-input-register {
+        border-radius: 5px;
+        border: none;
+        padding: 8px;
+        height: 40px;
+        border-bottom: solid #C13540 5px;
+    }
+
+    .register-form-group {
+        /* background: green; */
+        /* height: 50%; */
+        width: 80%;
+        margin:10px  0;
+        display: flex;
+        justify-content: flex-start;
+
+    }
+
+
+    .upload-progress-bar-3 {
+        width: 50%;
+    }
+
+    .custom-file-upload-3 {
+        /* background: red; */
+        width: 50%;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        color: grey;
+        font-weight: bold;
+        border: solid 3px grey;
+        cursor: pointer;
+    }
+}
+
+
+/* Tablet view */
+@media screen and (max-width: 900px) and (min-width: 601px){
+    .register {
+        height: 100%;
+    }
+    .register-page {
+        width: 90%;
+        margin: 20px 0;
+    }
+
+    .register-form-names {
+        height: 90px;
+    }
+}
+
+
+@media screen and (max-width: 1200px) and (min-width: 901px){
+    .register-page {
+        width: 80%;
+        margin: 30px 0;
+    }
+    .register {
+        height: 100%;
+    }
+}
+
+@media screen and (min-width: 1700px){
+    .register-header {
+        height: 100px;
+    }
+
+    .register-form-names, .form-submit-button {
+        height: 180px;
+    }
+
+    .register-form-group-title > h1, .form-submit-button > button{
+        
+        font-size: calc(30px + (40 - 30) * ((100vw - 1700px) / (3000 - 170)));
+    }
+
+    .text-input-register  {
+        font-size: calc(25px + (30 - 25) * ((100vw - 1700px) / (3000 - 170)));
+        border-bottom: solid #C13540 10px;
+    }
+
+    .profile-picture {
+        height: 250px;
+    }
+
+    .upload-progress-bar-3 {
+        height: 30px;
+    }
+    .custom-file-upload-3 {
+        height: 50px;
+        font-size: 25px;
+    }
+
+    .profile-pic-img {
+        height: 150px;
+        width: 150px;
+        border: solid #C13540 15px;
+
+    }
+
+    .profile-pic-img > img {
+        height: 135px;
+        width: 135px;
+    }
+}
+
+
