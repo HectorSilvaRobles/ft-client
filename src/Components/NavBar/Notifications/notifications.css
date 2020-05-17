@@ -135,12 +135,25 @@
 .popover-content {
     background: rgb(244, 244, 244);
     width: 30vw;
-    height: 45vh;
+    height: 400px;
     display: flex;
     border-radius: 5px;
     border:solid rgb(131, 131, 131) 2px;
     justify-content: center;
     align-items: center;
+}
+.popover-content-coachPost {
+    background: rgb(244, 244, 244);
+    width: 30vw;
+    height: 200px;
+    display: flex;
+    border-radius: 5px;
+    border:solid rgb(131, 131, 131) 2px;
+    justify-content: center;
+    align-items: center;
+    font-size: calc(18px + (25 - 18) * ((100vw - 300px) / (1700 - 300)));
+    text-align: center;
+    padding: 20px;
 }
 .performance-log-popover {
     height: 100%;
@@ -215,7 +228,7 @@
         width: 40%;
 
     }
-    .popover-content {
+    .popover-content, .popover-content-coachPost {
         width: 90vw;
     }
     .performance-log-popover-card {

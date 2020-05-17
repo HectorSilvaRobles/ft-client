@@ -1,5 +1,5 @@
 .navbar {
-    height: 10vh;
+    height: 100px;
     background: black;
     width: 100%;
     display: flex;
@@ -19,17 +19,17 @@
 }
 
 .navbar_links {
-    width: 75%;
+    width: 80%;
     height: 100%;
 }
 
 .nav-links {
-    width: 60%;
+    width: 70%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     height: 100%;
-    /* border: solid 2px green; */
+    /* background: green; */
 }
 
 .navlink {
@@ -41,21 +41,22 @@
 
 .navlink:hover {
     text-decoration: none;
-    color: red;
+    color: #C13540;
 }
 
 .login-button, .logout-button{
-    width: 25%;
+    width: 20%;
     height: 100%;
     /* border: solid 2px blue; */
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background: orange; */
 }
 
 .login-button > button, .logout-button > button {
     background: white;
-    width: 50%;
+    width: 70%;
     height: 60%;
     border: none;
     font-weight: bold;
@@ -63,7 +64,7 @@
     border-radius: 5px;
 }
 .login-button > button:hover, .logout-button > button:hover {
-    background: red;
+    background: #C13540;
     color: white;
 }
 .login-button > button:focus, .logout-button > button:focus {
@@ -71,7 +72,7 @@
 }
 
 .nav-logo > img {
-    width: 200px;
+    width: 70%;
     cursor: pointer;
 }
 
@@ -83,14 +84,22 @@
     justify-content: center;
     /* border: solid red 2px; */
 }
+.noti-badge {
+    /* background: red; */
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 1000px){
     .nav-links, .login-button, .logout-button, .reg-logo {
         display: none;
     }
     .navbar_links {
         width: 40%;
+        /* background: green; */
     }
     .nav-logo > img {
         width: 80px;
@@ -98,9 +107,20 @@
     .nav-logo {
         width: 40%;
     }
+
+    .noti-badge {
+        width: 30%;
+    }
 }
 
-@media screen and (min-width: 799px){
+@media screen and (max-width: 1000px) and (min-width: 601px){
+    .nav-logo {
+        /* background: red; */
+        width: 30%;
+    }
+}
+
+@media screen and (min-width: 1001px){
     .togglebutton, .mobile-logo {
         display: none;
     }

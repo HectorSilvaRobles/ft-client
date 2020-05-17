@@ -50,12 +50,12 @@ function LoginSection(props){
         return (
             <div className='navbar_real'>
                 <div className='nav-links'>
-                        <NavLink exact to='/' className='navlink' activeStyle={{color: 'red'}}>Home</NavLink>
-                        <NavLink exact to='/athletes' className='navlink' activeStyle={{color: 'red'}}>Athletes</NavLink>
-                        <NavLink exact to='/coaches' className='navlink' activeStyle={{color: 'red'}}>Coaches</NavLink>
-                        <NavLink exact to='/coach-dashboard' className='navlink' activeStyle={{color: 'red'}}>Dashboard</NavLink>
+                        <NavLink exact to='/' className='navlink' activeStyle={{color: '#C13540'}}>Home</NavLink>
+                        <NavLink exact to='/athletes' className='navlink' activeStyle={{color: '#C13540'}}>Athletes</NavLink>
+                        {/* <NavLink exact to='/coaches' className='navlink' activeStyle={{color: '#C13540'}}>Coaches</NavLink> */}
+                        <NavLink exact to='/coach-dashboard' className='navlink' activeStyle={{color: '#C13540'}}>Dashboard</NavLink>
                 </div>
-                <div>
+                <div className='noti-badge'>
                     {props.notification}
                 </div>
                 <span className='togglebutton'>
