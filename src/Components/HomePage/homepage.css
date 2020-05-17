@@ -3,20 +3,9 @@
     overflow: hidden;
 }
 .section1 {
-    height: 100vh;
-    background: black;
+    height: 1000px;
 }
 
-#section1-div {
-    /* background: red; */
-    position: absolute;
-    bottom: 0%;
-    height: 100px;
-    width: 100px;
-    padding: 0;
-    margin: 0;
-    opacity: 0;
-}
 #section1-div > img {
    height: 60%;
 }
@@ -24,9 +13,9 @@
 #banner-info {
     /* background: blue; */
     position: absolute;
-    height: 70%;
+    height: 500px;
     width: 40%;
-    /* bottom: 20%; */
+    bottom: 400px;
     left: 10%;
     display: flex;
     justify-content: center;
@@ -35,7 +24,7 @@
 }
 
 #banner-info >h3 {
-    margin-top: 50px;
+    margin-top: 20px;
     font-size: 25px;
     /* background: red; */
     font-weight: bold;
@@ -47,7 +36,7 @@
 }
 
 .banner-title {
-    font-size: calc(30px + (70 - 30) * ((100vw - 300px) / (1700 - 300)));
+    font-size: calc(30px + (60 - 30) * ((100vw - 300px) / (1700 - 300)));
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
     text-align: left;
@@ -59,7 +48,7 @@
 }
 
 .banner-small {
-    font-size: calc(20px + (40 - 20) * ((100vw - 300px) / (1700 - 300)));
+    font-size: calc(20px + (35 - 20) * ((100vw - 300px) / (1700 - 300)));
     color: white;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
     text-align: left;
@@ -69,10 +58,16 @@
 #banner-video {
     /* background: green; */
     position: absolute;
-    height: 70%;
-    width: 35%;
-    bottom: 20%;
-    left: 55%;
+    height: 600px;
+    width: 40%;
+    bottom: 350px;
+    left: 50%;
+    overflow: hidden;
+}
+
+#banner-video > video {
+    height: 100%;
+    /* width: 100%; */
 }
 #section1 > h1 {
     color: white;
@@ -95,6 +90,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    opacity: 0;
     padding: 0;
     vertical-align: middle;
     display: flex;
@@ -106,7 +102,7 @@
 
 
 .section2 {
-    height: 80vh;
+    height: 1000px;
     background: black;
     width: 100%;
     display: flex;
@@ -118,7 +114,7 @@
 
 #sec2-h1-1  {
     z-index: 2;
-    width: 50%;
+    width: 60%;
     position: absolute;
     text-align: center;
     text-transform: capitalize;
@@ -126,22 +122,23 @@
     font-weight: bold;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: calc(50px + (100 - 50) * ((100vw - 300px) / (1700 - 300)));
-    top: 30%;
+    top: 300px;
     opacity: 0;
 }
 
 #video-sec2 {
     /* background: red;  */
-    height: 500px;
+    height: 800px;
     width: 80%;
     position: absolute;
-    top: 80%;
+    top: 10px;
 }
 
 #video-sec2 > video {
     width: 100%;
     height: 100%;
     top: 0%;
+    /* background: green; */
     position: relative;
 }
 
@@ -186,9 +183,8 @@
 
 
 
-
+/* Mobile view */
 @media screen and (max-width: 600px){
-
     #section1 {
         display: flex;
         flex-direction: column;;
@@ -199,7 +195,7 @@
         /* background: green; */
         width: 90%;
         height: 50%;
-        top: 30%;
+        top: 200px;
         left: 5%;
         justify-content: center;
         align-items: center;
@@ -226,9 +222,8 @@
         /* width: 100%; */
         height: 100%;
     }
-    .section2 {
-        height: 70vh;
-        /* background: grey; */
+    #section2 {
+        height: 1000px;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -245,14 +240,18 @@
         font-size: calc(30px + (40 - 30) * ((100vw - 300px) / (600 - 300)));
     }
     #sec2-h1-1 {
-        top: 60%;
+        top: 500px;
     }
-    #sec2-h1-2 {
-        top: 75%;
+
+    #video-sec2 {
+        top: 100px;
+        height: 100%;
     }
-    #sec2-h1-3 {
-        top: 90%;
+
+    #video-sec2 > video {
+        width: none;
     }
+
 
     #sec3-h1 {
         display: none;
@@ -264,17 +263,24 @@
         left: 5%;
         /* background: blue; */
         text-align: center;
-        top: 70%;
+        top: 500px;
     }
     #sec3-vid {
         width: 90%;
         left: 5%;
-        height: 60%;
-        top: 20%;
+        height: 500px;
+        top: 150px;
+        /* background: green; */
+        overflow: hidden;
+    }
+    #sec3-vid > video {
+        height: none;
+        width: none;
     }
 }
 
 
+/* Tablet View */
 @media screen and (max-width: 1000px) and (min-width: 601px){
     #section1 {
         display: flex;
@@ -284,10 +290,10 @@
 
     #banner-info {
         /* background: green; */
-        width: 90%;
+        width: 80%;
         height: 50%;
-        top: 300px;
-        left: 5%;
+        top: 200px;
+        left: 10%;
         justify-content: center;
         align-items: center;
         z-index: 1;
@@ -309,12 +315,147 @@
         width: 100%;
         height: 100%;
         left: 0%;
-        top: 0%;
+        bottom: 0px;
+        top: 10px;
         /* background: blue; */
     }
     #banner-video > video {
-        width: 100%;
-        /* height: 100%; */
+        /* width: 100%; */
+        height: 100%;
+    }
+
+    #sec2-h1-1 {
+        width: 80%;
+    }
+}
+
+
+
+/* Laptop view */
+@media screen and (min-width: 1001px) and (max-width: 1250px){
+    #sec2-h1-1 {
+        width: 70%;
+    }
+    #banner-info >h3 {
+        /* margin-top: 50px; */
+        font-size: 20px;
+        /* background: red; */
+        font-weight: bold;
+        text-transform: uppercase;
+        color: white;
+        box-shadow: 0px 0px 50px 5px rgba(255,255,255,1);
+        padding: 20px;
+        border-radius: 50px;
+    }
+    
+    .banner-title {
+        font-size: calc(30px + (50 - 30) * ((100vw - 300px) / (1700 - 300)));
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+        text-align: left;
+        font-weight: bold;
+        text-shadow: 2px 2px 2px white;
+        /* width: 100%; */
+        width: 90%;
+    
+    }
+    
+    .banner-small {
+        font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1700 - 300)));
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+        text-align: left;
+        font-weight: 500;
+        width: 90%;
+    }
+    #banner-info {
+        width: 45%;
+        left: 5%;
+    }
+
+    #banner-video {
+        width: 45%;
+        left: 50%;
+    }
+}
+
+
+@media screen and (min-width: 1700px){
+
+    .section1 {
+        height: 1500px;
+        /* background: red; */
+    }
+    #banner-info {
+        bottom: 400px;
+        height: 50%;
+        /* background: blue; */
+    }
+
+    #banner-info >h3 {
+        margin-top: 50px;
+        font-size: 40px;
+        /* background: red; */
+        font-weight: bold;
+        text-transform: uppercase;
+        color: white;
+        box-shadow: 0px 0px 50px 5px rgba(255,255,255,1);
+        padding: 30px;
+        border-radius: 50px;
+    }
+    
+    .banner-title {
+        font-size: calc(50px + (80 - 50) * ((100vw - 300px) / (1700 - 300)));
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+        text-align: left;
+        font-weight: bold;
+        text-shadow: 2px 2px 2px white;
+        /* width: 100%; */
+        width: 90%;
+    
+    }
+    
+    .banner-small {
+        font-size: calc(20px + (40 - 20) * ((100vw - 300px) / (1700 - 300)));
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+        text-align: left;
+        font-weight: 500;
+        width: 80%;
+        margin: 20px 0;
+    }
+
+    #banner-video {
+        background: green;
+        width: 40%;
+        left: 50%;
+        bottom: 200px;
+        height: 80%;
+    }
+
+    #section1-div {
+        /* background: red; */
+        /* opacity: 1; */
+        width: 800px;
+        height: 800px;
+        top: 1000px;
+    }
+
+    #section2 {
+        height: 1500px;
+    }
+
+    #sec2-h1-1 {
+        top: 500px;
+        width: 50%;
+    }
+
+    #video-sec2 {
+        height: 1200px;
+        width: 80%;
+        position: absolute;
+        top: 200px;
     }
 }
 
