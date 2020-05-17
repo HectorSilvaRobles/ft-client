@@ -117,7 +117,9 @@ function RegisterPage(props){
                 <div className='register'>
                     <div className='register-page'>
                         <div className='register-form'>
-                            <div className='register-header'></div>
+                            <div className='register-header'>
+                                <h1>Register New Coach Account</h1>
+                            </div>
                             <div className='reigster-body'>
                                 <Form onSubmit={handleSubmit}>
                                 <div className='profile-picture'>

@@ -14,6 +14,7 @@
     "dotenv": "^8.2.0",
     "firebase": "^7.14.1",
     "formik": "^2.1.4",
+    "gsap": "^3.2.6",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
@@ -28,6 +29,8 @@
     "redux": "^4.0.5",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
+    "scrollmagic": "^2.0.7",
+    "scrollmagic-plugin-gsap": "^1.0.4",
     "slick-carousel": "^1.8.1",
     "tough-cookie": "^4.0.0",
     "yup": "^0.28.4"
