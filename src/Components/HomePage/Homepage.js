@@ -158,6 +158,46 @@ export class Homepage extends Component {
             opacity: 1
         })
         .addTo(this.controller)
+
+        
+
+
+        // Section 4 scene
+        new ScrollMagic.Scene({
+            duration: 3000,
+            triggerElement: '#section4',
+            triggerHook: 0
+        })
+        .setPin('#section4')
+        .addTo(this.controller)
+
+        // Section4 badge scene
+        new ScrollMagic.Scene({
+            duration: 3000,
+            triggerElement: '#sec3-vid',
+            triggerHook: 0
+        })
+        .setTween('#badge-end', {
+            y: 350,
+            // x: 200,
+            scale: 2,
+            opacity: 1
+        })
+        .addTo(this.controller)
+
+        // Section4 text scene
+        new ScrollMagic.Scene({
+            duration: 3000,
+            triggerElement: '#section4',
+            triggerHook: 0
+        })
+        .setTween('#text-end', {
+            y: -100,
+            // x: 200,
+            scale: 1.2,
+            opacity: 1
+        })
+        .addTo(this.controller)
     }
 
     render() {
@@ -190,7 +230,10 @@ export class Homepage extends Component {
                     </div>
                 </div>
                 <div className='section4' id='section4'>
-
+                    <div id='badge-end'>
+                        <img src={badge} />
+                    </div>
+                    <div id='text-end'>Train with us and Write Your Story.</div>
                 </div>
             </div>
         )

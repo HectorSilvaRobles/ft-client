@@ -176,8 +176,41 @@
 
 
 .section4 {
-    height: 100vh;
-    background: white;
+    height: 1000px;
+    background: black;
+}
+
+#text-end {
+    /* background: red;/ */
+    width: 50%;
+    height: 200px;
+    position: relative;
+    left: 25%;
+    top: 400px;
+    opacity: 0;
+    color: white;
+    font-weight: bold;
+    text-transform: capitalize;
+    font-size: calc(40px + (70 - 40) * ((100vw - 600px) / (1700 - 600)));
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;;
+
+}
+
+#badge-end {
+    /* background: blue; */
+    height: 300px;
+    width: 300px;
+    position: relative;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#badge-end >img {
+    width: 50%;
 }
 
 
@@ -277,6 +310,13 @@
         height: none;
         width: none;
     }
+
+    #text-end {
+        width: 80%;
+        left: 10%;
+        font-size: calc(30px + (40 - 30) * ((100vw - 300px) / (600 - 300)));
+
+    }
 }
 
 
@@ -327,6 +367,28 @@
     #sec2-h1-1 {
         width: 80%;
     }
+    #sec3-h1 {
+        display: none;
+    }
+    #sec3-h1-mobile {
+        /* background: red; */
+        width: 90%;
+        left: 5%;
+        top: 70px;
+        text-align: center;
+    }
+    #sec3-vid {
+        width: 90%;
+        left: 5%;
+        height: 500px;
+        top: 350px;
+        background: black;
+        overflow: hidden;
+    }
+    #sec3-vid > video {
+        height: none;
+        width: 100%;;
+    }
 }
 
 
@@ -368,6 +430,8 @@
         font-weight: 500;
         width: 90%;
     }
+
+   
     #banner-info {
         width: 45%;
         left: 5%;
@@ -377,9 +441,24 @@
         width: 45%;
         left: 50%;
     }
+
+    #sec3-h1 {
+        /* background: red; */
+        left: -100px;
+        top: 400px;
+        font-size: calc(30px + (40 - 30) * ((100vw - 300px) / (1700 - 300)));
+    }
+    #sec3-vid {
+        /* background: blue; */
+        width: 40%;
+        left: 55%;
+        top: 100px;
+    }
 }
 
 
+
+ /* 4k view */
 @media screen and (min-width: 1700px){
 
     .section1 {
@@ -457,9 +536,31 @@
         position: absolute;
         top: 200px;
     }
+
+    #sec3-h1 {
+        /* background: red; */
+        top: 700px;
+        left: 100px;
+    }
+
+    .section4 {
+        height: 1500px;
+        /* background: red; */
+    }
+
+    #badge-end {
+        /* background: blue; */
+        width: 600px;
+        top: 100px;
+        
+    }
+    #text-end {
+        top: 700px;
+        font-size: 150px;
+    }
 }
 
-@media screen and (min-width: 601px){
+@media screen and (min-width: 1001px){
     #sec3-h1-mobile {
         display: none;
     }

@@ -75,11 +75,11 @@ function Notifications(props){
 
     // If pending request is rejected
     const rejectedRequest = (request_id) => {
-        // dispatch(removeRequest(request_id))
-        // .then(res => {
-        //     console.log(res)
-        //     dispatch(getAllRequest())
-        // })
+        dispatch(removeRequest(request_id))
+        .then(res => {
+            console.log(res)
+            dispatch(getAllRequest())
+        })
     }
 
     let all_requests;
@@ -105,11 +105,8 @@ function Notifications(props){
                         const {_id} = all_Athletes[i]
                         if(_id == athlete_id){
                             selected_athlete = all_Athletes[i]
-                            // console.log(all_Athletes[i])
                         } 
-                        // else {
-                        //     rejectedRequest(val._id)
-                        // }
+                        
                     }
                 }
                 const {firstname, lastname} = selected_athlete
@@ -132,7 +129,7 @@ function Notifications(props){
                         }}
                     >
                     {val.typeOfEndpoint == 'createCoachPost' ? 
-                            <div>
+                            <div className='popover-content-coachPost'>
                                 {val.dataToSubmit.coach_message}
                             </div>
                         : null}
@@ -141,7 +138,7 @@ function Notifications(props){
                         <div className='popover-content'>
                                 <div className='performance-log-popover'>
                                     <div className='performance-log-popover-card'>
-                                    <h1>Energy</h1>
+                                        <h1>Energy</h1>
                                                 <div>
                                                 
                                                     {[...Array(5)].map((value, index) => {
@@ -158,7 +155,7 @@ function Notifications(props){
                                                 </div>
                                     </div>
                                     <div className='performance-log-popover-card'>
-                                    <h1>Focus</h1>
+                                        <h1>Focus</h1>
                                                 <div>
                                                     {[...Array(5)].map((value, index) => {
                                                         return (
@@ -174,7 +171,7 @@ function Notifications(props){
                                                 </div>
                                     </div>
                                     <div className='performance-log-popover-card'>
-                                    <h1>Leadership</h1>
+                                        <h1>Leadership</h1>
                                                 <div>
                                                     {[...Array(5)].map((value, index) => {
                                                         return (
