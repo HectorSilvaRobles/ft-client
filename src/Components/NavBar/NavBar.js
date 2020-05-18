@@ -12,7 +12,7 @@ import Backdrop from './Hamburger/Backdrop/Backdrop';
 
 import Notifications from './Notifications/Notifications'
 
-require('./navbar.css' )
+require('./module.navbar.css' )
 
 
 export class NavBar extends Component {
