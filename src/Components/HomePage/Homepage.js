@@ -210,7 +210,7 @@ export class Homepage extends Component {
                         <h3 id='banner-scroll'>Scroll To Learn More</h3>
                     </div>
                     <div id='banner-video'>
-                        <video src={banner} autoPlay={true} muted={true} loop={true} />
+                        <video id='banner-video-vid' src={banner} autoPlay={true} muted={true} loop={true} />
                     </div>
                     <div id='section1-div' >
                         <img id='section1-h1' src={badge} />

@@ -65,7 +65,7 @@
     overflow: hidden;
 }
 
-#banner-video > video {
+#banner-video > video , #banner-video-vid {
     height: 100%;
     /* width: 100%; */
 }
