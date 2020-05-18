@@ -1,6 +1,6 @@
 .drawer {
     height: 100vh;
-    background: black;
+    background: blue;
     position: fixed;
     top: 0;
     right: 0;
@@ -57,7 +57,7 @@
 
 }
 
-@media screen and (min-width: 799px){
+@media screen and (min-width: 1000px){
     .drawer {
         display: none;
     }
