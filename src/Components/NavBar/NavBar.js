@@ -6,12 +6,14 @@ import logi from '../../Media/logi.png'
 
 import {getAllRequest} from '../../Redux/actions/pending_actions'
 import {connect} from 'react-redux'
-require('./navbar.css' )
 
 import SideDrawer from './Hamburger/SideDrawer/SideDrawer';
 import Backdrop from './Hamburger/Backdrop/Backdrop';
 
 import Notifications from './Notifications/Notifications'
+
+require('./navbar.css' )
+
 
 export class NavBar extends Component {
     constructor(props){
