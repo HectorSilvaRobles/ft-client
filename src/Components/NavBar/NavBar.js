@@ -6,7 +6,7 @@ import logi from '../../Media/logi.png'
 
 import {getAllRequest} from '../../Redux/actions/pending_actions'
 import {connect} from 'react-redux'
-import './navbar.css'
+require('./navbar.css' )
 
 import SideDrawer from './Hamburger/SideDrawer/SideDrawer';
 import Backdrop from './Hamburger/Backdrop/Backdrop';

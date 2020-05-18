@@ -3,9 +3,8 @@ import video from '../../Media/video2.mp4'
 import video2 from '../../Media/vid2.mp4'
 import banner from '../../Media/banner.mp4'
 
-
 import badge from '../../Media/badg.png'
-import './homepage.css'
+require('./homepage.css')
 import {TweenMax} from 'gsap'
 import ScrollMagic from 'scrollmagic'
 import {ScrollMagicPluginGsap} from 'scrollmagic-plugin-gsap'
