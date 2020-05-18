@@ -205,9 +205,9 @@ export class Homepage extends Component {
             <div className='homepage'>
                 <div className='section1' id='section1' >
                     <div id='banner-info'>
-                        <h1 className='banner-title'>AB Futbol Training</h1>
-                        <h2 className='banner-small'>Working with clubs and athletes to train and improve skills essential to the game.</h2>
-                        <h3 className='banner-scroll'>Scroll To Learn More</h3>
+                        <h1 id='banner-title'>AB Futbol Training</h1>
+                        <h2 id='banner-small'>Working with clubs and athletes to train and improve skills essential to the game.</h2>
+                        <h3 id='banner-scroll'>Scroll To Learn More</h3>
                     </div>
                     <div id='banner-video'>
                         <video src={banner} autoPlay={true} muted={true} loop={true} />
