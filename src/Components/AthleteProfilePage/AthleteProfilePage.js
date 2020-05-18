@@ -289,13 +289,14 @@ export class AthleteProfilePage extends Component {
                                     height='100%' 
                                     className='react-player' 
                                     width='100%' 
+                                    preload='metadata'
                                     onClick={() => {
                                         this.setState({
                                             highlightModal: true,
                                             highlightVideo: val})
                                     }
                                 }>
-                                <source src={val.video_link} type='video/mp4' /></video>
+                                <source src={`${val.video_link}#t=0.5`} type='video/mp4' /></video>
                             </div>
                         )
                     })}
