@@ -7,6 +7,7 @@
     justify-content: center;
     overflow: hidden;
     position: fixed;
+    z-index: 3;
 }
 
 .nav-logo, #nav-logo {
@@ -97,8 +98,11 @@
     .nav-links, .login-button, .logout-button, .reg-logo {
         display: none;
     }
-    .navbar_links {
-        width: 40%;
+    #navbar {
+        justify-content: space-between;
+    }
+    #navbar_links {
+        width: 50%;
         /* background: green; */
     }
     .nav-logo > img {
@@ -110,18 +114,65 @@
 
     .noti-badge {
         width: 30%;
+        /* background: blue; */
+    }
+}
+
+@media screen and (max-width: 600px){
+    #nav-logo {
+        width: 30%;
+    }
+
+    #navbar_links {
+        width: 40%;
     }
 }
 
 @media screen and (max-width: 1000px) and (min-width: 601px){
-    .nav-logo {
+    #nav-logo {
         /* background: red; */
         width: 30%;
+    }
+
+    #nav-logo > img {
+        height: 100%;
+        width: 100px;
     }
 }
 
 @media screen and (min-width: 1001px){
     .togglebutton, .mobile-logo {
         display: none;
+    }
+}
+
+@media screen and (min-width: 1700px){
+    #navbar {
+        height: 200px;
+    }
+    .navlink {
+        font-size: 35px;
+    }
+
+    .login-button > button, .logout-button > button {
+        background: white;
+        width: 70%;
+        height: 50%;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 30px;
+        border-radius: 5px;
+    }
+
+    .noti-badge > div >span > svg {
+        font-size: 30px;
+        height: 80px;
+        width: 80px;
+    }
+    .noti-badge > div >span > span {
+        font-size: 30px;
+        height: 40px;
+        width: 40px;
     }
 }

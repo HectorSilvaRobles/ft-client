@@ -15,7 +15,7 @@
     position: absolute;
     height: 500px;
     width: 40%;
-    bottom: 400px;
+    bottom: 300px;
     left: 10%;
     display: flex;
     justify-content: center;
@@ -60,7 +60,7 @@
     position: absolute;
     height: 600px;
     width: 40%;
-    bottom: 350px;
+    bottom: 250px;
     left: 50%;
     overflow: hidden;
 }
