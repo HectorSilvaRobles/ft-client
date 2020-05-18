@@ -210,7 +210,7 @@ export class Homepage extends Component {
                         <h3 id='banner-scroll'>Scroll To Learn More</h3>
                     </div>
                     <div id='banner-video'>
-                        <video id='banner-video-vid' src={banner} autoPlay={true} muted={true} loop={true} />
+                        <video id='banner-video-vid' playsInline src={banner} autoPlay={true} muted={true} loop={true} />
                     </div>
                     <div id='section1-div' >
                         <img id='section1-h1' src={badge} />
@@ -218,7 +218,7 @@ export class Homepage extends Component {
                 </div>
                 <div className='section2' id='section2'>
                     <div className='video-sec2' id='video-sec2'>
-                        <video id='video-1' src={video} muted={true} loop={true} autoPlay={true} />
+                        <video id='video-1' playsInline src={video} muted={true} loop={true} autoPlay={true} />
                     </div>
                     <h1 id='sec2-h1-1'>We help athletes Improve their skills on the field</h1>
                 </div>
@@ -226,7 +226,7 @@ export class Homepage extends Component {
                     <h1 id='sec3-h1'>By individually working with each athlete, We create a unique training experience.</h1>
                     <h1 id='sec3-h1-mobile'>By individually working with each athlete, We create a unique training experience.</h1>
                     <div id='sec3-vid'>
-                        <video id='video-2'  src={video2} loop={true} muted={true} autoPlay={true}   />
+                        <video id='video-2' playsInline  src={video2} loop={true} muted={true} autoPlay={true}   />
                     </div>
                 </div>
                 <div className='section4' id='section4'>
