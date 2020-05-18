@@ -1,10 +1,12 @@
 import axios from 'axios';
 import {ALL_ATHLETES, ADD_ATHLETE, REMOVE_ATHLETE, UPDATE_ATHLETE} from './types'
 
-const endpointUrl = 'http://ec2-3-101-59-77.us-west-1.compute.amazonaws.com'
+// const endpointUrl = 'https://www.abfutbolserver.xyz'
+const endpointUrl = process.env.REACT_APP_SERVER_API
+
 
 export function getAllAthletes(){
-    const request = axios.get('http://ec2-3-101-59-77.us-west-1.compute.amazonaws.com/api/athletes/all-athletes')
+    const request = axios.get(`${endpointUrl}/api/athletes/all-athletes`)
     .then(res => res.data)
 
     return {

@@ -1,7 +1,9 @@
 import axios from 'axios'
 import {CREATE_COACH_POST, CREATE_PERFORMANCE_LOG, UPLOAD_HIGHLIGHT, DELETE_COACH_POST} from './types'
 
-const endpointUrl = 'http://ec2-3-101-59-77.us-west-1.compute.amazonaws.com'
+// const endpointUrl = 'https://www.abfutbolserver.xyz'
+const endpointUrl = process.env.REACT_APP_SERVER_API
+
 
 
 var newDate = new Date()

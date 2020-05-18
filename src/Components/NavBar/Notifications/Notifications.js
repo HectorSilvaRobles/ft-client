@@ -25,6 +25,7 @@ function Notifications(props){
     const dispatch = useDispatch()
     const classes = useStyles();
 
+
      // Modal handler for opening and closing modals
      const [show, setShow] = useState(false);
      const handleClose = () => setShow(false);
