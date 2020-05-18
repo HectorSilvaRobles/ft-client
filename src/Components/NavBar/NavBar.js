@@ -12,7 +12,7 @@ import Backdrop from './Hamburger/Backdrop/Backdrop';
 
 import Notifications from './Notifications/Notifications'
 
-require('./module.navbar.css' )
+require('./navbar.css' )
 
 
 export class NavBar extends Component {
@@ -60,14 +60,14 @@ export class NavBar extends Component {
         }
 
         return (    
-            <div className='navbar'>
+            <div className='navbar' id='navbar'>
                 {this.state.redirect ? <Redirect to='/' /> : null}
-                <div className='nav-logo'>
-                    <img src={logo} alt='futbol training logo' onClick={() => this.toHomePage()} className='reg-logo' />
-                    <img src={logi} alt='futbol training mobile logo' onClick={() => this.toHomePage()} className='mobile-logo' />
+                <div className='nav-logo' id='nav-logo'>
+                    <img src={logo} alt='futbol training logo' onClick={() => this.toHomePage()} className='reg-logo' id='reg-logo'/>
+                    <img src={logi} alt='futbol training mobile logo' onClick={() => this.toHomePage()} className='mobile-logo' id='mobile-logo'/>
 
                 </div>
-                <div className='navbar_links'>
+                <div className='navbar_links' id='navbar_links'>
                     {accRole =='Admin' ? <LoginSection notification={<Notifications />} drawerclick={this.drawerToggleClick} /> : <LoginSection drawerclick={this.drawerToggleClick} />}
                     <SideDrawer show={this.state.drawerOpen} />
                     {backdrop}
