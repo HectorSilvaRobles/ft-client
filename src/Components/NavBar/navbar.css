@@ -1,4 +1,4 @@
-.navbar {
+.navbar, #navbar {
     height: 100px;
     background: black;
     width: 100%;
@@ -9,7 +9,7 @@
     position: fixed;
 }
 
-.nav-logo {
+.nav-logo, #nav-logo {
     /* border: solid 2px orange; */
     width: 20%;
     height: 100%;
@@ -18,7 +18,7 @@
     justify-content: center;
 }
 
-.navbar_links {
+.navbar_links, #navbar_links {
     width: 80%;
     height: 100%;
 }
@@ -71,7 +71,7 @@
     outline: none;
 }
 
-.nav-logo > img {
+.nav-logo > img, #reg-logo, #mobile-logo {
     width: 70%;
     cursor: pointer;
 }
