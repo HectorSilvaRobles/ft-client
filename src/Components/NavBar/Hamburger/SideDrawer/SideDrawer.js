@@ -40,7 +40,7 @@ export default function SideDrawer(props){
             <div className={drawerClasses}>
                 <NavLink exact to ='/' activeStyle={{color: 'red'}} >Home</NavLink>
                 <NavLink exact to ='/athletes' activeStyle={{color: 'red'}} >Athletes</NavLink>
-                <NavLink exact to ='/coaches' activeStyle={{color: 'red'}} >Coaches</NavLink>
+                {/* <NavLink exact to ='/coaches' activeStyle={{color: 'red'}} >Coaches</NavLink> */}
                 <button onClick={toLoginPage} >Login</button>
                 {redirect ? <Redirect to='/login' /> : null}
             </div>
@@ -50,7 +50,7 @@ export default function SideDrawer(props){
             <div className={drawerClasses}>
                 <NavLink exact to ='/' activeStyle={{color: 'red'}} >Home</NavLink>
                 <NavLink exact to ='/athletes' activeStyle={{color: 'red'}} >Athletes</NavLink>
-                <NavLink exact to ='/coaches' activeStyle={{color: 'red'}} >Coaches</NavLink>
+                {/* <NavLink exact to ='/coaches' activeStyle={{color: 'red'}} >Coaches</NavLink> */}
                 <NavLink exact to ='/coach-dashboard' activeStyle={{color: 'red'}} >Dashboard</NavLink>
                 <button onClick={() => handleLogout()}>Logout</button>
             </div>
