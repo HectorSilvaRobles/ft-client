@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {LOGIN_USER, REGISTER_USER, LOGOUT_USER, AUTH_USER, UPDATE_USER} from './types'
 
-const endpointUrl = 'http://ec2-3-101-59-77.us-west-1.compute.amazonaws.com'
+const endpointUrl = process.env.REACT_APP_SERVER_API
 axios.defaults.withCredentials = true;
 
 export function registerUser(dataToSubmit){

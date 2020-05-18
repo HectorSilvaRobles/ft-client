@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import axios from 'axios'
 import ToggleButton from '../Hamburger/Togglebutton/ToggleButton'
 
-const endpointUrl = 'http://ec2-3-101-59-77.us-west-1.compute.amazonaws.com'
+const endpointUrl = process.env.REACT_APP_SERVER_API
 
 
 function LoginSection(props){
