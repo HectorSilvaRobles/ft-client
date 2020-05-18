@@ -1,6 +1,6 @@
 {
   "name": "ab-ft-client",
-  "homepage": "https://master.d19991sr5v1b1y.amplifyapp.com/",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -58,7 +58,9 @@
     ]
   },
   "devDependencies": {
-    "http-proxy-middleware": "^1.0.3"
+    "css-loader": "^3.5.3",
+    "http-proxy-middleware": "^1.0.3",
+    "style-loader": "^1.2.1"
   },
   "main": "index.js"
 }
