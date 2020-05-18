@@ -9,10 +9,15 @@
     /* background: blue; */
 }
 
+
+.accordion-con {
+    margin-top: 100px;
+}
+
 .accordion-card {
     /* background: red; */
     width: 60vw;
-    border-radius: 200px;
+    /* border-radius: 200px; */
     margin: 50px 0;
 }
 

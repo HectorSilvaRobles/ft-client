@@ -184,7 +184,7 @@ export class AthleteProfilePage extends Component {
             return (
                 <div className='coach-posts'>
                     <h1>{this.state.athlete.firstname}'s Newsfeed</h1>
-                    <button onClick={() => this.reorderPosts() }>Button</button>
+                    {/* <button onClick={() => this.reorderPosts() }>Button</button> */}
                     {coach_posts_cards}
                 </div>
             )

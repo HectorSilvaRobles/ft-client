@@ -4,7 +4,7 @@ import {Accordion, Card} from 'react-bootstrap'
 
 function AccordionComp(props){
     return (
-            <Accordion defaultActiveKey="0" >
+            <Accordion defaultActiveKey="0" className='accordion-con' >
                 <Card className='accordion-card'>
                     <Accordion.Toggle eventKey="0" className='accordion-card-header'>
                         {props.coachPostTitle}
