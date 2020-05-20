@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getAllAthletes} from '../../Redux/actions/athlete_actions'
 import {deleteCoachPost} from '../../Redux/actions/coach_to_athlete_actions'
 import {Accordion} from 'react-bootstrap'
-import {FaStar, FaTrashAlt, FaPlay, FaPause} from 'react-icons/fa'
+import {FaStar, FaTrashAlt, FaPlay, FaPause, FaPlayCircle} from 'react-icons/fa'
 import './athleteprofilepage.css'
 import Slider from 'react-slick';
 import Modal from '@material-ui/core/Modal';
@@ -322,7 +322,6 @@ export class AthleteProfilePage extends Component {
 
     highlightsRender = () => {
         const {athlete, all_highlights} = this.state
-        console.log(this.state.all_highlights)
         return (
             <div className="highlight-area">
                 <h1>{athlete.firstname}'s Highlights</h1>
@@ -336,13 +335,19 @@ export class AthleteProfilePage extends Component {
                                     className='react-player' 
                                     width='100%' 
                                     preload='metadata'
-                                    onClick={() => {
+                                    
+                                >
+                                <source src={`${val.video_link}#t=0.5`} type='video/mp4' />
+                                </video>
+
+                                <div className='video-overlay' onClick={() => {
                                         this.setState({
                                             highlightModal: true,
                                             highlightVideo: val})
                                     }
                                 }>
-                                <source src={`${val.video_link}#t=0.5`} type='video/mp4' /></video>
+                                    <FaPlayCircle  />
+                                </div>
                             </div>
                         )
                     })}
