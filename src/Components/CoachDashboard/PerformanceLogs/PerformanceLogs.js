@@ -6,6 +6,7 @@ import {createPerformanceLog} from '../../../Redux/actions/coach_to_athlete_acti
 import {sendRequest, getAllRequest} from '../../../Redux/actions/pending_actions'
  
 import AthleteSelect from '../AthleteSelect/AthleteSelect'
+import { toast } from 'react-toastify';
 
 class PerformanceLogs extends Component {
     constructor(props){
@@ -84,7 +85,7 @@ class PerformanceLogs extends Component {
                     .then(res => {
                         if(res.payload.success){
                             this.setState({postSuccess: true})
-                            alert('Your post was successfully created. Now waiting for approval.')
+                            toast.success('Your post was successfully created. Now waiting for approval.')
                         }
                         this.props.getAllRequest()
 
