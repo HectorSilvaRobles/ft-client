@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     height: 100%;
+    /* margin-top: 150px; */
 }
 .register-page {
     /* background: red; */
@@ -14,7 +15,7 @@
     align-items: center;
     border-radius: 10px;
     overflow: hidden;
-    margin: 50px 0;
+    margin: 150px 0;
     box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.8)
 }
 .register-header {
@@ -159,7 +160,7 @@
     .register-page {
         width: 90%;
         height: 100%;
-        margin: 20px 0;
+        margin: 150px 0;
     }
 
     .register-form-names {
@@ -221,7 +222,7 @@
     }
     .register-page {
         width: 90%;
-        margin: 20px 0;
+        margin: 150px 0;
     }
 
     .register-form-names {
@@ -233,14 +234,17 @@
 @media screen and (max-width: 1200px) and (min-width: 901px){
     .register-page {
         width: 80%;
-        margin: 30px 0;
+        margin: 150px 0;
     }
     .register {
         height: 100%;
     }
 }
 
-@media screen and (min-width: 1700px){
+@media screen and (min-width: 1900px){
+    .register-page {
+        margin: 300px;
+    }
     .register-header {
         height: 100px;
     }

@@ -30,7 +30,7 @@
     letter-spacing: 2px;
 }
 
-.drawer > a:active, .drawer > a:focus {
+.drawer > a:active, .drawer > a:focus, .drawer > a:hover {
     color: red;
     text-decoration: none;
 }   

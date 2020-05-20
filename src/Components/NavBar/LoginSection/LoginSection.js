@@ -35,7 +35,7 @@ function LoginSection(props){
                 <div className='nav-links'>
                         <NavLink exact to='/' className='navlink' activeStyle={{color: 'red'}}>Home</NavLink>
                         <NavLink exact to='/athletes' className='navlink' activeStyle={{color: 'red'}}>Athletes</NavLink>
-                        <NavLink exact to='/coaches' className='navlink' activeStyle={{color: 'red'}}>Coaches</NavLink>
+                        {/* <NavLink exact to='/coaches' className='navlink' activeStyle={{color: 'red'}}>Coaches</NavLink> */}
                 </div>
                 <span className='togglebutton'>
                     <ToggleButton click={props.drawerclick} />

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getAllAthletes} from '../../Redux/actions/athlete_actions'
 import {deleteCoachPost} from '../../Redux/actions/coach_to_athlete_actions'
 import {Accordion} from 'react-bootstrap'
-import {FaStar, FaTrashAlt, FaPlay, FaPause} from 'react-icons/fa'
+import {FaStar, FaTrashAlt, FaPlay, FaPause, FaPlayCircle} from 'react-icons/fa'
 import './athleteprofilepage.css'
 import Slider from 'react-slick';
 import Modal from '@material-ui/core/Modal';
@@ -20,6 +20,8 @@ export class AthleteProfilePage extends Component {
             athlete: null,
             coach_posts: true,
             all_coach_posts: [],
+            all_performance_logs: [],
+            all_highlights: [],
             performance_logs: false,
             highlights: false,
             highlightModal: false,
@@ -61,10 +63,11 @@ export class AthleteProfilePage extends Component {
             let all_athletes = res.payload.all_Athletes
             all_athletes.map(val => {
                 if(val._id == athlete_id){
-                    this.setState({athlete: val, all_coach_posts: val.coach_posts})
+                    this.setState({athlete: val, all_coach_posts: val.coach_posts, all_performance_logs: val.performance_logs, all_highlights: val.highlights})
                 }
             })
         })
+
     }
 
 
@@ -87,19 +90,18 @@ export class AthleteProfilePage extends Component {
 
 
 
-    ////////// NEEDS WORK TO BE DONE STILL ////////////
+    ////////// Reorder posts ////////////
     reorderPosts = (reorderBy, typeOfPost) => {
-        console.log(reorderBy)
         const {all_coach_posts} = this.state
-        if(all_coach_posts){
-            const monthsToNum = { 'Jan' : 1,'Feb' : 2,'Mar' : 3,'Apr' : 4,'May' : 5,'June' : 6,'July' : 7,'Aug' : 8,'Sep' : 9, 'Oct' : 10, 'Nov' : 11,'Dec' : 12 }
-            
-            let reordered = all_coach_posts.sort(function(a, b){
+        const monthsToNum = { 'Jan' : 1,'Feb' : 2,'Mar' : 3,'Apr' : 4,'May' : 5,'June' : 6,'July' : 7,'Aug' : 8,'Sep' : 9, 'Oct' : 10, 'Nov' : 11,'Dec' : 12 }
+
+        // for coach posts
+        if(all_coach_posts && typeOfPost == 'coachPosts'){
+            let reorderedByDate = all_coach_posts.sort(function(a, b){
                 a = a.date_of_post.split(' ')
                 let intYear = parseInt(a[2])
                 let intDay = parseInt(a[1])
                 let intMonth = monthsToNum[a[0]]
-
                 a[0] = intYear
                 a[1] = intMonth
                 a[2] = intDay
@@ -109,7 +111,6 @@ export class AthleteProfilePage extends Component {
                 let intYearB = parseInt(b[2])
                 let intDayB = parseInt(b[1])
                 let intMonthB = monthsToNum[b[0]]
-
                 b[0] = intYearB
                 b[1] = intMonthB
                 b[2] = intDayB
@@ -121,8 +122,38 @@ export class AthleteProfilePage extends Component {
                     return a -b
                 }
             })
+            this.setState({all_coach_posts: reorderedByDate})
+        }
 
-            this.setState({all_coach_posts: reordered})
+
+        // for performance logs
+        if(this.state.athlete.performance_logs && typeOfPost == 'performanceLogs'){
+            let reorderedByDate = this.state.athlete.performance_logs.sort(function(a, b){
+                a = a.date_of_post.split(' ')
+                let intYear = parseInt(a[2])
+                let intDay = parseInt(a[1])
+                let intMonth = monthsToNum[a[0]]
+                a[0] = intYear
+                a[1] = intMonth
+                a[2] = intDay
+                a = a.join('')
+
+                b = b.date_of_post.split(' ')
+                let intYearB = parseInt(b[2])
+                let intDayB = parseInt(b[1])
+                let intMonthB = monthsToNum[b[0]]
+                b[0] = intYearB
+                b[1] = intMonthB
+                b[2] = intDayB
+                b = b.join('')
+
+                if(reorderBy == 'Recent'){
+                    return b- a
+                } else if (reorderBy == 'Oldest'){
+                    return a -b
+                }
+            })
+            this.setState({all_performance_logs: reorderedByDate})
         }
     }
 
@@ -130,6 +161,7 @@ export class AthleteProfilePage extends Component {
     // Render each of the athlete's Coach posts
     coachPosts = () => {
         const {all_coach_posts} = this.state
+
         if(all_coach_posts){
             let coach_posts_cards
             if(all_coach_posts.length > 0){
@@ -139,8 +171,17 @@ export class AthleteProfilePage extends Component {
                     return (
                         <div className='coach_posts_card' key={val._id}>
                             <div className='coach_posts_card_header'>
+                                <div className='coach_post_header_info'>
                                 <img src={coach_profile_pic} />
                                 <h1>Coach {coach_writer}</h1> 
+                                </div>
+                                
+                                {coach_id == this.props.coach_user.userData._id  && coach_id ? 
+                                <div className='delete-option'>
+                                <FaTrashAlt color='white' onClick={() => this.deleteFunctionality('coach_post', val._id)} size={20} className='delete-icon' />
+                                </div> 
+                            : null 
+                            }
                             </div>
                             <div className='coach_posts_card_content'>
                                 <div className='cpcc_upper'>
@@ -151,12 +192,7 @@ export class AthleteProfilePage extends Component {
                                     <p>{coach_message}</p>
                                 </div>
                             </div>
-                            {coach_id == this.props.coach_user.userData._id  && coach_id ? 
-                                <div className='delete-option'>
-                                <FaTrashAlt color='#C13540' onClick={() => this.deleteFunctionality('coach_post', val._id)} size={20} className='delete-icon' />
-                                </div> 
-                            : null 
-                            }
+                            
 
                         </div>
                     )
@@ -170,13 +206,18 @@ export class AthleteProfilePage extends Component {
                 )
             }
             return (
+                
                 <div className='coach-posts'>
                     <h1>{this.state.athlete.firstname}'s Newsfeed</h1>
-                    <select onChange={(e) => this.reorderPosts(e.target.value, 'coachPosts')}>
-                        <option value='Recent'>Recent</option>
-                        <option value='Oldest'>Oldest</option>
-
-                    </select>
+                    <div className='sort-by'>
+                        <h1>Sort By</h1>
+                        <select onChange={(e) => this.reorderPosts(e.target.value, 'coachPosts')}>
+                            <option value='select'>Select</option>
+                            <option value='Recent'>Recent</option>
+                            <option value='Oldest'>Oldest</option>
+                        </select>
+                    </div>
+                    
                             {/* <button onClick={() => this.reorderPosts() }>Button</button> */}
                     {coach_posts_cards}
                 </div>
@@ -187,13 +228,25 @@ export class AthleteProfilePage extends Component {
 
     // Render all the performance logs
     performanceLogs =() => {
-        const {athlete} = this.state
+        const {athlete, all_performance_logs} = this.state
+
         return (
             <div className='performance-accordion-component'>
                 <h1>{athlete.firstname}'s Performance</h1>
+                {all_performance_logs.length > 0 ? 
+                    <div className='sort-by'>
+                        <h1>Sort By</h1>
+                        <select onChange={(e) => this.reorderPosts(e.target.value, 'performanceLogs')}>
+                                <option value='select'>Select</option>
+                                <option value='Recent'>Recent</option>
+                                <option value='Oldest'>Oldest</option>
+                        </select>
+                    </div>
+                
+                : null}
                 {athlete.performance_logs.length > 0 ? 
-                <Accordion defaultActiveKey={0}>
-                    {athlete.performance_logs.map((val, index) => {
+                <Accordion defaultActiveKey={0} className='performance-accord'>
+                    {all_performance_logs.map((val, index) => {
                             return (
                                 <div className='performance-accordion' key={index}>
                                     <Accordion.Toggle eventKey={index} className='performance-accordion-header'>
@@ -268,14 +321,13 @@ export class AthleteProfilePage extends Component {
 
 
     highlightsRender = () => {
-        const {athlete} = this.state
-
+        const {athlete, all_highlights} = this.state
         return (
             <div className="highlight-area">
                 <h1>{athlete.firstname}'s Highlights</h1>
                 {athlete.highlights.length > 0 ?
                 <div className='highlights-go-here'>
-                    {athlete.highlights.map((val, index) => {
+                    {all_highlights.map((val, index) => {
                         return (
                             <div className='highlight-container' key={index} >
                                 <video 
@@ -283,13 +335,19 @@ export class AthleteProfilePage extends Component {
                                     className='react-player' 
                                     width='100%' 
                                     preload='metadata'
-                                    onClick={() => {
+                                    
+                                >
+                                <source src={`${val.video_link}#t=0.5`} type='video/mp4' />
+                                </video>
+
+                                <div className='video-overlay' onClick={() => {
                                         this.setState({
                                             highlightModal: true,
                                             highlightVideo: val})
                                     }
                                 }>
-                                <source src={`${val.video_link}#t=0.5`} type='video/mp4' /></video>
+                                    <FaPlayCircle  />
+                                </div>
                             </div>
                         )
                     })}
