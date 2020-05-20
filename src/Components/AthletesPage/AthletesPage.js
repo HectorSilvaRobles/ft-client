@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {useSelector} from 'react-redux'
 import './athletepage.css'
 import { Redirect } from 'react-router-dom'
+import {Spinner} from 'react-bootstrap'
 
 function AthletesPage(props) {
     const athletes = useSelector(state => { 
@@ -32,7 +33,12 @@ function AthletesPage(props) {
             )
         })
     } else {
-        alert('loading') ///////// Add loading screen/spinner
+        return (
+            <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        )
+
     }
 
     return (

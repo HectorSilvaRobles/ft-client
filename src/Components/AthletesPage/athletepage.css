@@ -27,7 +27,7 @@
     /* margin: 30px 30px; */
     width: 100%;
     height: 350px;
-    max-width: 300px;
+    /* max-width: 300px; */
     border: #C6C6C6 2px solid;
     border-radius: 20px;
     margin-left: 10px;
@@ -40,12 +40,14 @@
     border: solid 5px #C13540; 
     height: 120px;
     position: cover;
+    object-fit: cover;
     margin: 10px 0;
 }
 
 .athlete-card > h1 {
     font-size: 25px;
     margin: 2px 0;
+    text-transform: capitalize;;
 }
 
 .athlete-card > h2 {
@@ -63,8 +65,46 @@
     margin: 10px;
 }
 
+.athlete-card > button:focus, .athlete-card > button:active {
+    outline: none;
+}
+
 @media screen and (max-width: 600px){
     .athlete-card-layout {
         width: 95%;
+    }
+}
+
+@media screen and (min-width: 1400px){
+    .athlete-card-layout {
+        grid-template-columns: repeat(4, minmax(250px, 2fr));
+    }
+}
+
+@media screen and (min-width: 1900px){
+    .athlete-card-layout {
+        margin-top: 250px;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        grid-auto-rows: minmax(50px, auto);
+        grid-gap: 80px;
+    }
+
+    .athlete-card {
+        height: 500px;
+    }
+
+    .athlete-card > img {
+        height: 200px;
+        width: 200px;
+        border: solid 10px #C13540; 
+    }
+    .athlete-card > h1 {
+        font-size: 40px;
+    }
+    .athlete-card > h2 {
+        font-size: 25px;
+    }
+    .athlete-card > button {
+        font-size: 25px;
     }
 }

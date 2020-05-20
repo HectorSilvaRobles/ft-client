@@ -32,6 +32,7 @@ export class AthleteProfilePage extends Component {
                 slidesToShow: 3,
                 slidesToScroll: 1,
                  swipeToSlide: true,
+                 center: true,
                 className: 'profile-options-real',
                 responsive: [
 
@@ -87,54 +88,41 @@ export class AthleteProfilePage extends Component {
 
 
     ////////// NEEDS WORK TO BE DONE STILL ////////////
-    reorderPosts = () => {
+    reorderPosts = (reorderBy, typeOfPost) => {
+        console.log(reorderBy)
         const {all_coach_posts} = this.state
         if(all_coach_posts){
-            const monthsToNum = {
-                'Jan' : 1,
-                'Feb' : 2,
-                'Mar' : 3,
-                'Apr' : 4,
-                'May' : 5,
-                'June' : 6,
-                'July' : 7,
-                'Aug' : 8,
-                'Sep' : 9,
-                'Oct' : 10,
-                'Nov' : 11,
-                'Dec' : 12
-            }
+            const monthsToNum = { 'Jan' : 1,'Feb' : 2,'Mar' : 3,'Apr' : 4,'May' : 5,'June' : 6,'July' : 7,'Aug' : 8,'Sep' : 9, 'Oct' : 10, 'Nov' : 11,'Dec' : 12 }
+            
+            let reordered = all_coach_posts.sort(function(a, b){
+                a = a.date_of_post.split(' ')
+                let intYear = parseInt(a[2])
+                let intDay = parseInt(a[1])
+                let intMonth = monthsToNum[a[0]]
 
-            let newdate_coach_post = all_coach_posts.map((val, index) => {
-                let {date_of_post} = val
-                date_of_post = date_of_post.split(' ')
-                for(var key in monthsToNum){
-                    if(key == date_of_post[0]){
-                        date_of_post[0] = monthsToNum[key]
-                    }
+                a[0] = intYear
+                a[1] = intMonth
+                a[2] = intDay
+                a = a.join('')
+
+                b = b.date_of_post.split(' ')
+                let intYearB = parseInt(b[2])
+                let intDayB = parseInt(b[1])
+                let intMonthB = monthsToNum[b[0]]
+
+                b[0] = intYearB
+                b[1] = intMonthB
+                b[2] = intDayB
+                b = b.join('')
+
+                if(reorderBy == 'Recent'){
+                    return b- a
+                } else if (reorderBy == 'Oldest'){
+                    return a -b
                 }
-                date_of_post[1] = parseInt(date_of_post[1])
-                date_of_post[2] = parseInt(date_of_post[2])
-                
-                let reorderedDates = []
-                reorderedDates.push(date_of_post[1])
-                reorderedDates.push(date_of_post[0])
-                reorderedDates.push(date_of_post[2])
-                reorderedDates = reorderedDates.sort()
-                // reorderedDates = reorderedDates.join('')
-
-                // val.date_of_post = reorderedDates
-                // return val
             })
-            return newdate_coach_post
 
-            // newdate_coach_post = newdate_coach_post.sort(function(a,b){
-            //     return a.date_of_post < b.date_of_post ? 1 : a.date_of_post > b.date_of_post ? -1 : 0
-            // })
-
-            
-            // this.setState({all_coach_posts: newdate_coach_post})
-            
+            this.setState({all_coach_posts: reordered})
         }
     }
 
@@ -184,7 +172,12 @@ export class AthleteProfilePage extends Component {
             return (
                 <div className='coach-posts'>
                     <h1>{this.state.athlete.firstname}'s Newsfeed</h1>
-                    {/* <button onClick={() => this.reorderPosts() }>Button</button> */}
+                    <select onChange={(e) => this.reorderPosts(e.target.value, 'coachPosts')}>
+                        <option value='Recent'>Recent</option>
+                        <option value='Oldest'>Oldest</option>
+
+                    </select>
+                            {/* <button onClick={() => this.reorderPosts() }>Button</button> */}
                     {coach_posts_cards}
                 </div>
             )
