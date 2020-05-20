@@ -263,7 +263,7 @@
     align-items: center;
 }
 
-.accordion {
+.performance-accord {
     width: 100%;
 }
 .performance-accordion {
@@ -271,6 +271,7 @@
     border: 4px solid #D9D5D5;
     margin: 40px 0;
     border-radius: 10px;
+    overflow: hidden;
     width: 100;
 }
 .performance-accordion-header {
@@ -905,6 +906,17 @@
     .highlight-modal {
         width: 50%;
     }
+
+    .video-overlay > svg{
+        position: relative;
+        top: 40%;
+        z-index: 2;
+        color: white;
+        width: 80px;
+        height: 80px;
+        fill-opacity: 1;
+    }
+    
 
     .video-info{
         height: 1000px;

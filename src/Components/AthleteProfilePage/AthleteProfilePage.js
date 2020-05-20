@@ -245,7 +245,7 @@ export class AthleteProfilePage extends Component {
                 
                 : null}
                 {athlete.performance_logs.length > 0 ? 
-                <Accordion defaultActiveKey={0}>
+                <Accordion defaultActiveKey={0} className='performance-accord'>
                     {all_performance_logs.map((val, index) => {
                             return (
                                 <div className='performance-accordion' key={index}>
