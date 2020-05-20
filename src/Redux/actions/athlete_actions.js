@@ -3,6 +3,8 @@ import {ALL_ATHLETES, ADD_ATHLETE, REMOVE_ATHLETE, UPDATE_ATHLETE} from './types
 
 const endpointUrl = process.env.REACT_APP_SERVER_API
 
+console.log(endpointUrl)
+
 
 export function getAllAthletes(){
     const request = axios.get(`${endpointUrl}/api/athletes/all-athletes`)
