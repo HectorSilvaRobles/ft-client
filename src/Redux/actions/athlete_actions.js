@@ -1,7 +1,6 @@
 import axios from 'axios';
 import {ALL_ATHLETES, ADD_ATHLETE, REMOVE_ATHLETE, UPDATE_ATHLETE} from './types'
 
-// const endpointUrl = 'https://www.abfutbolserver.xyz'
 const endpointUrl = process.env.REACT_APP_SERVER_API
 
 

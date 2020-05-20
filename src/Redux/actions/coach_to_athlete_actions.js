@@ -1,7 +1,6 @@
 import axios from 'axios'
 import {CREATE_COACH_POST, CREATE_PERFORMANCE_LOG, UPLOAD_HIGHLIGHT, DELETE_COACH_POST} from './types'
 
-// const endpointUrl = 'https://www.abfutbolserver.xyz'
 const endpointUrl = process.env.REACT_APP_SERVER_API
 
 
