@@ -6,6 +6,8 @@ import {toast} from 'react-toastify'
 
 import "../node_modules/slick-carousel/slick/slick.css"; 
 import "../node_modules/slick-carousel/slick/slick-theme.css";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 import NavBar from './Components/NavBar/NavBar'
 import HomePage from './Components/HomePage/Homepage'

@@ -416,6 +416,7 @@ export class AthleteProfilePage extends Component {
 
     handleDisplayAthlete =() => {
         const {athlete} = this.state
+        console.log(athlete)
 
         return (
             <div className='athlete-profile'>
@@ -427,7 +428,8 @@ export class AthleteProfilePage extends Component {
                     <div className='profile-header-info'>
                         <h1>{athlete.firstname} {athlete.lastname}</h1>
                         <h2>Position: {athlete.position}</h2>
-                        <h2>Age: {athlete.age}</h2>
+                        <h3>Club: {athlete.club ? athlete.club : 'N/A'}</h3>
+                        <h3>DOB: {athlete.dateOfBirth}</h3>
                     </div>
                 </div>
                 <div className='profile-options'>

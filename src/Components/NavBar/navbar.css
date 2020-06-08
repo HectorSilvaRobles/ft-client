@@ -1,5 +1,5 @@
 .navbar, #navbar {
-    height: 100px;
+    height: 80px;
     background: black;
     width: 100%;
     display: flex;
@@ -73,7 +73,8 @@
 }
 
 .nav-logo > img, #reg-logo, #mobile-logo {
-    width: 70%;
+    height: 70%;
+    object-fit: cover;
     cursor: pointer;
 }
 

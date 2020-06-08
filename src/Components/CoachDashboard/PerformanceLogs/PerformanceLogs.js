@@ -57,7 +57,7 @@ class PerformanceLogs extends Component {
         
         // Check to see if any of the inputs are empty if so let them know they have to fill it out
         if(!energy_rating || !focus_rating || !leadership_rating || selectedAthletes.length < 1){
-            console.log('error')
+            toast.error('please completely fill out performance log.')
         }
         else {
             this.state.selectedAthletes.map(val => {
@@ -77,6 +77,7 @@ class PerformanceLogs extends Component {
                     .then(res => {
                         if(res.payload.success){
                             this.setState({postSuccess: true})
+                            toast.success('Your log was successfully created.')
                         }
                         this.props.getAllRequest()
                     })
@@ -85,7 +86,7 @@ class PerformanceLogs extends Component {
                     .then(res => {
                         if(res.payload.success){
                             this.setState({postSuccess: true})
-                            toast.success('Your post was successfully created. Now waiting for approval.')
+                            toast.success('Your log was successfully created. Now waiting for approval.')
                         }
                         this.props.getAllRequest()
 

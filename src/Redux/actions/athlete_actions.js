@@ -3,8 +3,6 @@ import {ALL_ATHLETES, ADD_ATHLETE, REMOVE_ATHLETE, UPDATE_ATHLETE} from './types
 
 const endpointUrl = process.env.REACT_APP_SERVER_API
 
-
-
 export function getAllAthletes(){
     const request = axios.get(`${endpointUrl}/api/athletes/all-athletes`)
     .then(res => res.data)
@@ -17,7 +15,6 @@ export function getAllAthletes(){
 
 
 export function addAthlete(dataToSubmit){
-    console.log(dataToSubmit)
     const request = axios.post(`${endpointUrl}/api/athletes/add-athlete`, dataToSubmit)
     .then(res => res.data)
     .catch(err => err)
