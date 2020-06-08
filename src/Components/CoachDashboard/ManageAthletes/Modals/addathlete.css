@@ -46,7 +46,7 @@
 
 .fg-name {
     /* background: red; */
-    width: 35%;
+    width: 40%;
 }
 
 .text-input {
@@ -56,7 +56,7 @@
 .form-group {
     /* background: green; */
     height: 80px;
-    margin: 16px;
+    margin: 15px;
     display: flex;
     flex-direction: column;
 }
@@ -112,10 +112,17 @@
 
 .o-form {
     /* background: red; */
-    width: 35%;
+    width: 25%;
     /* margin: 0 20px; */
 }
-
+.date-of-birth {
+    height: 50%;
+    display: flex;
+}
+.date-picker {
+    height: 40px;
+    width: 100%;
+}
 .form-group-buttons {
     /* background: orange; */
     background: #F7F7F7;
@@ -189,6 +196,10 @@
         width: 100%;
     }
 
+    .react-datepicker-wrapper {
+        width: 100%;
+    }
+
     .form-group-name {
         flex-direction: column;
         height: 30vh;
@@ -203,16 +214,22 @@
         width: 100%;
     }
 
+    .form-group-other {
+        height: 300px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .o-form {
+        width: 80%;
+    }
+
     .form-group-buttons > button {
         width: 80%;
     }
 }
 
 @media screen and (max-width: 1000px) and (min-width: 601px){
-    .form-group-athlete-pic, .form-group-form {
-        width: 100%;
-    }
-
     .form-group-name {
         flex-direction: column;
         height: 230px;;

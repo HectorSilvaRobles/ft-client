@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import {Formik, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import {Modal, ProgressBar} from 'react-bootstrap'
+import {FaRegCalendarAlt} from 'react-icons/fa'
 import {storage} from '../../../../firebaseConfig'
 import {toast} from 'react-toastify';
 import {useDispatch} from 'react-redux'
 import './addathlete.css'
+import DatePicker from 'react-datepicker'
 import {addAthlete, getAllAthletes} from '../../../../Redux/actions/athlete_actions'
 
 function AddAthleteModal(props){
@@ -19,6 +21,16 @@ function AddAthleteModal(props){
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+
+    // for selecting a date of birth
+    const [startDate, setStartDate] = useState(null)
+    const handleDOB = date => {
+        setStartDate(date)
+    }
+    const CustomDatePick = ({value, onClick}) => (
+        <FaRegCalendarAlt onClick={onClick} />
+    )
 
 
     // Uploading athlete picture to firebase and getting back the URL to image
@@ -64,7 +76,8 @@ function AddAthleteModal(props){
                         firstname: '',
                         lastname: '',
                         position: '',
-                        age: '',
+                        dateOfBirth: '',
+                        club: '',
                         athlete_pic: athletePic
                     }}
 
@@ -74,14 +87,13 @@ function AddAthleteModal(props){
                                 firstname: values.firstname,
                                 lastname: values.lastname,
                                 position: values.position,
-                                age: values.age,
+                                dateOfBirth: startDate ? startDate.toDateString().split(' ').slice(1 ).join('-') : null,
+                                club: values.club,
                                 athlete_pic: athletePic
                             }
-                            
-
-                            if(!dataToSubmit.athlete_pic){
+                            if(!dataToSubmit.athlete_pic || dataToSubmit.dateOfBirth == null){
                                 setUploadError('Please add athlete picture')
-                                toast.error('Please add an athlete picture')
+                                toast.error('Please add a athlete picture and fill out form ')
                             } else {
                                 dispatch(addAthlete(dataToSubmit)).then(res => {
                                     if(res.payload.success){
@@ -93,8 +105,6 @@ function AddAthleteModal(props){
                                 resetForm();
                                 setSubmitting(false)
                             }
-
-                            
                         }, 500)
                     }}
                     
@@ -102,26 +112,26 @@ function AddAthleteModal(props){
                         firstname: Yup.string().required('Athlete\'s first name is required'),
                         lastname: Yup.string().required('Athlete\'s last name is required'),
                         position: Yup.string().required('Athlete\'s position is required'),
-                        age: Yup.number().required('Athlete\'s age is required'),
+                        club: Yup.string()
+                        // dateOfBirth: Yup.string().required('Athlete\'s date of birth is required')
                         // athlete_pic: Yup.string().required('Athlete\'s picture is required')
                     })}
                 >
                 {props => {
                     const {values, touched, errors, isSubmitting, handleChange, handleBlur, handleSubmit} = props
-
                     // reset form after successfully adding athlete
                     const resetForm = () => {
                         setUploadSuccess(false)
+                        setStartDate(null)
                         setAthletePic(null)
                         setPicProgress(0)
-                        {/* handleClose() */}
                         return;
                     }
                     
                     return (
                         <div>
                             <button className='athlete-modal-button' onClick={handleShow}>Add Athlete</button>
-                            <Modal show={show} onHide={handleClose} size='lg'>
+                            <Modal show={show} onHide={handleClose} size='lg' className='add-athlete-modal'>
                                 <Modal.Header>
                                         <div className='add-athlete-modal-header'>
                                             <h1>Add Athlete</h1>
@@ -209,21 +219,54 @@ function AddAthleteModal(props){
                                                         </Field>
                                                     </div>
 
+                                                    <div className='form-group o-form'>
+                                                        <div className='form-label'>
+                                                            <h1>Date Of Birth</h1>
+                                                            <div className='input-error-feedback'>*</div>
+                                                        </div>
+                                                        <div className='date-of-birth'>
+                                                            <DatePicker 
+                                                                selected={startDate}
+                                                                onChange={handleDOB}
+                                                                showMonthDropdown
+                                                                showYearDropdown
+                                                                className='date-picker'
+                                                                dropdownMode="select"
+                                                                scrollableYearDropdown
+                                                                yearDropdownItemNumber={10}
+                                                                placeholderText="Select a date"
+                                                            />
+                                                        </div>
+                                                        
+                                                            {/* <Field 
+                                                                id="dateOfBirth" 
+                                                                type="string" 
+                                                                value={values.dateOfBirth}
+                                                                onChange={handleChange}
+                                                                onBlur={handleBlur} 
+                                                                placeholder={"Athlete's Club"}
+                                                                className={
+                                                                    errors.dateOfBirth && touched.dateOfBirth ? 'text-input error' : 'text-input'
+                                                                } 
+                                                            /> */}
+                                                    </div>
+
                                                     <div className="form-group o-form">
                                                         <div className='form-label'>
-                                                            <h1>Age</h1>
-                                                            {errors.age ? <div className='input-error-feedback'>*</div> : null}
+                                                            <h1>Club</h1>
+                                                            {errors.club ? <div className='input-error-feedback'>*</div> : null}
                                                         </div>
                                                         {/* <label htmlFor="age">Age</label> */}
+                                                        
                                                         <Field 
-                                                            id="age" 
-                                                            type="number" 
-                                                            value={values.age}
+                                                            id="club" 
+                                                            type='string' 
+                                                            value={values.club}
                                                             onChange={handleChange}
                                                             onBlur={handleBlur} 
-                                                            placeholder='Athlete age'
+                                                            placeholder={"Athlete's Club"}
                                                             className={
-                                                                errors.age && touched.age ? 'text-input error' : 'text-input'
+                                                                errors.club && touched.club ? 'text-input error' : 'text-input'
                                                             } 
                                                         />
                                                     </div>

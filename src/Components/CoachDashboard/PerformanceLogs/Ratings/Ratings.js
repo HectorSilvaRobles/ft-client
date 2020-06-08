@@ -1,14 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {FaStar} from 'react-icons/fa'
 
 export default function Ratings(props) {
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null)
-
+    
     const starRating = (
                 [...Array(5)].map((star, i) => {
                     let ratingValue = i + 1
-
+                    console.log(rating)
                     return (
                             <label key={i}>
                                 <input 

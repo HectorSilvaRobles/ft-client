@@ -3,8 +3,6 @@ import {CREATE_COACH_POST, CREATE_PERFORMANCE_LOG, UPLOAD_HIGHLIGHT, DELETE_COAC
 
 const endpointUrl = process.env.REACT_APP_SERVER_API
 
-
-
 var newDate = new Date()
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 const theMonth = months[newDate.getMonth()]
